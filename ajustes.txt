@@ -1,0 +1,14 @@
+Erros
+- metodo sem uso Turma.localizarAluno
+- metodos fazendo a mesma coisa Turma.adicionarAluno e Turma.adicionarAlunoInicio
+
+- Aluno nao deve possuir atributo Turma nem Escola (erro de modelagem, pesquisar composicao e agregacao POO)
+  - Escola é composta por turmas
+  - Aluno tem agregacao com uma turma
+
+https://www.infoworld.com/article/3029325/exploring-association-aggregation-and-composition-in-oop.html
+
+
+- Turma nao deve possuir Escola
+
+- Controlador com muitas responsabilidades

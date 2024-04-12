@@ -3,8 +3,6 @@ public class Aluno {
     private String primeiroNomeAluno;
     private String sobrenomeAluno;
     private int idade;
-    private Turma turma;
-    private Escola escola;
 
     public Aluno(String primeiroNomeAluno, String sobrenomeAluno, int idade) {
         this.primeiroNomeAluno = primeiroNomeAluno;
@@ -18,6 +16,15 @@ public class Aluno {
         String salt = String.valueOf(num);
 
         return String.valueOf(primeiroNomeAluno.length()) + String.valueOf(sobrenomeAluno.length()) + String.valueOf(idade) + salt;
+    }
+
+    public Aluno atualizarAluno(String primeiroNome, String sobrenome, int idade) {
+        System.out.println("Aluno: " + this.getPrimeiroNomeAluno() + " "+ this.getSobrenomeAluno() + " Idade: " + this.getIdade());
+        this.setPrimeiroNomeAluno(primeiroNome);
+        this.setSobrenomeAluno(sobrenome);
+        this.setIdade(idade);
+        System.out.println("Atualizado para: "+ this.getPrimeiroNomeAluno() + " "+ this.getSobrenomeAluno()+ " Idade: "+ this.getIdade());
+        return this;
     }
 
     public String getPrimeiroNomeAluno() {
@@ -48,27 +55,11 @@ public class Aluno {
         return id;
     }
 
-    public Turma getTurma() {
-        return turma;
-    }
-
-    public void setTurma(Turma turma) {
-        this.turma = turma;
-    }
-
-    public Escola getEscola() {
-        return escola;
-    }
-
-    public void setEscola(Escola escola) {
-        this.escola = escola;
-    }
-
     @Override
     public String toString() {
         return "Aluno{ Id: "+ id +
                 " Nome='" + primeiroNomeAluno+  " " + sobrenomeAluno + '\'' +
-                ", idade= " + idade + ", Turma: "+ turma+ ", Escola: "+  escola.getNomeEscola() + "  }\n ";
+                ", idade= " + idade  + "  }\n ";
 
     }
 }
