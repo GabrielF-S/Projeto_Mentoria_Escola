@@ -4,7 +4,7 @@ import java.util.List;
 public class Turma {
     private final int TAMANHO_MAX= 3;
     private String nomeTurma;
-    private Escola escola;
+
     List<Aluno> alunos = new ArrayList<>();
 
     public Turma(String nomeTurma) {
@@ -19,14 +19,6 @@ public class Turma {
         this.nomeTurma = nomeTurma;
     }
 
-    public Escola getEscola() {
-        return escola;
-    }
-
-    public void setEscola(Escola escola) {
-        this.escola = escola;
-    }
-
     public List<Aluno> getAlunos() {
         return alunos;
     }
@@ -38,19 +30,6 @@ public class Turma {
     public void adicionarAluno(Aluno aluno){
         if (alunos.size()<TAMANHO_MAX){
             alunos.add(aluno);
-            aluno.setTurma(this);
-            aluno.setEscola(getEscola());
-            System.out.println("Aluno cadastrado com sucesso!");
-            System.out.println(aluno);
-        }else {
-            System.out.println("ERRO: Não é possivel adicionar mais alunos nesta turma");
-        }
-    }    public void adicionarAlunoInicio(Aluno aluno){
-        if (alunos.size()<TAMANHO_MAX){
-            alunos.add(aluno);
-            aluno.setTurma(this);
-            aluno.setEscola(getEscola());
-
         }else {
             System.out.println("ERRO: Não é possivel adicionar mais alunos nesta turma");
         }
@@ -60,17 +39,7 @@ public class Turma {
 
     @Override
     public String toString() {
-        return "Escola: "+ escola.getNomeEscola() + " Turma: " + nomeTurma;
-    }
-
-    public void localizarAluno(String nomeAluno) {
-        if (!alunos.isEmpty()) {
-             for (Aluno aluno : alunos) {
-                 if (aluno.getPrimeiroNomeAluno().equalsIgnoreCase(nomeAluno)) {
-                    System.out.println(aluno);
-            }
-        }
-    }
+        return "Turma: " + nomeTurma;
     }
 
     public Aluno localizarAlunoId(String idAluno) {

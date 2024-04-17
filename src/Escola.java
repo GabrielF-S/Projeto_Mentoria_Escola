@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class Escola {
     private String nomeEscola;
@@ -8,7 +7,7 @@ public class Escola {
     private List<Turma> turmas = new ArrayList<>();
 
     private List<Aluno> alunos = new ArrayList<>();
-    private   Controlador controlador;
+    private  Controlador controlador;
 
     public Escola(String nomeEscola) {
         this.nomeEscola = nomeEscola;
@@ -34,9 +33,9 @@ public class Escola {
         if(!turmas.isEmpty()) {
             String idAluno = controlador.localizarAluno();
             Turma turma = controlador.localizarAlunoTurma(idAluno);
-            if (turma != null){
+            if (turma != null) {
                 Aluno aluno = turma.localizarAlunoId(idAluno);
-                if (aluno !=null){
+                if (aluno != null){
                     if (controlador.confirmacao()){
                         controlador.atualizarAluno(aluno);
 
@@ -136,9 +135,8 @@ public class Escola {
 
     }
 
-    public  void adicionarTurma(Turma turma){
+    public void adicionarTurma(Turma turma){
         turmas.add(turma);
-        turma.setEscola(this);
     }
     public void cadastrarAluno() {
         if (turmas.isEmpty()){
@@ -169,9 +167,19 @@ public class Escola {
         this.controlador = controlador;
     }
 
-    public void localizarTurma() {
-       Turma turma = controlador.localizarTurma();
-        System.out.println(turma.toString());
+    public Turma localizarTurma(String nomeTurma) {
+        if (this.getTurmas().isEmpty()){
+            System.out.println("ERRO: Não há turmas cadastradas");
+        }
+
+        for (Turma turma  : this.getTurmas()){
+            if (turma.getNomeTurma().equalsIgnoreCase(nomeTurma)){
+                return turma;
+            }
+        }
+
+        System.out.println("ERRO: Turma não localizada!");
+        return null;
     }
 
     public void localizarTodosAlunos() {

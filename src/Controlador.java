@@ -17,13 +17,13 @@ public class Controlador {
         escola.adicionarTurma(turma3);
 
         Aluno aluno1 = new Aluno("John","Doe", 18);
-        turma1.adicionarAlunoInicio(aluno1);
+        turma1.adicionarAluno(aluno1);
         escola.adicionarAluno(aluno1);
         Aluno aluno2 = new Aluno("Bill" ,"Doe", 19);
-        turma2.adicionarAlunoInicio(aluno2);
+        turma2.adicionarAluno(aluno2);
         escola.adicionarAluno(aluno2);
         Aluno aluno3 = new Aluno("Mary","Doe", 17);
-        turma3.adicionarAlunoInicio(aluno3);
+        turma3.adicionarAluno(aluno3);
         escola.adicionarAluno(aluno3);
 
         menu();
@@ -43,7 +43,6 @@ public class Controlador {
                 System.out.println("Insira o numero da opção do Menu");
 
                 int opcao = input.nextInt();
-                input.nextLine();
                 switch (opcao) {
                     case 1 -> cadastrarMenu();
                     case 2 -> procurarMenu();
@@ -54,7 +53,6 @@ public class Controlador {
                         System.out.println("Encerrando...");
                     }
                 }
-
             }
         }catch (RuntimeException e){
             System.out.println("ERRO FATAL: FINALIZANDO PROGRAMA");
@@ -72,7 +70,6 @@ public class Controlador {
                 case 1 -> escola.excluirTurmas();
                 case 2 -> escola.excluirAluno();
                 case 3 -> {
-
                     controleMenu = false;
                 }
             }
@@ -89,7 +86,6 @@ public class Controlador {
                 case 1 -> escola.editarTurmas();
                 case 2 -> escola.atualizarAluno();
                 case 3 -> {
-
                     controleMenu = false;
                 }
             }
@@ -105,7 +101,7 @@ public class Controlador {
             input.nextLine();
             switch (opcao) {
                 case 1 -> escola.localizarTodasTurmas();
-                case 2-> escola.localizarTurma();
+                case 2-> this.localizarTurma();
                 case 3 -> escola.localizarAluno();
                 case 4 -> escola.localizarTodosAlunos();
                 case 5 -> {
@@ -177,44 +173,18 @@ public class Controlador {
         System.out.println("Informe a idade do aluno: ");
         int novaIdade = input.nextInt();
         input.nextLine();
-
-        System.out.println("Aluno: " + aluno.getPrimeiroNomeAluno() + " "+ aluno.getSobrenomeAluno() + " Idade: " + aluno.getIdade());
-        System.out.println("Atualizado para: "+ novoNome + " "+ novoSobrenome+ " Idade: "+ novaIdade);
-        aluno.setPrimeiroNomeAluno(novoNome);
-        aluno.setSobrenomeAluno(novoSobrenome);
-        aluno.setIdade(novaIdade);
-
+        aluno.atualizarAluno(novoNome, novoSobrenome, novaIdade);
     }
 
     public Turma localizarTurma() {
-        if (escola.getTurmas().isEmpty()){
-            System.out.println("ERRO: Não há turmas cadastradas");
-        }
         System.out.println("Informe o nome da turma: ");
         String nomeTurma = input.nextLine();
-
-        for (Turma turma  : escola.getTurmas()){
-            if (turma.getNomeTurma().equalsIgnoreCase(nomeTurma)){
-                return turma;
-            }
-        }
-        System.out.println("ERRO: Turma não localizada!");
-        return null;
-
+        return this.escola.localizarTurma(nomeTurma);
     }
 
     public Turma localizarAlunoTurma(String idAluno) {
-
         for (Turma turma  : escola.getTurmas()){
-            for (Aluno aluno : turma.getAlunos()){
-                if (aluno.getId().equalsIgnoreCase(idAluno)){
-                    return turma;
-                } else if (aluno.getPrimeiroNomeAluno().equalsIgnoreCase(idAluno)) {
-                    return turma;
-
-                }
-            }
-
+            turma.localizarAlunoId(idAluno);
         }
         System.out.println("ERRO: Aluno não localizado!");
         return null;
