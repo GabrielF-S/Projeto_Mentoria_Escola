@@ -1,0 +1,38 @@
+#version: '3.9'
+volumes:
+  dados:
+networks:
+  rede_mentoria:
+services:
+
+  my-postgres:
+    image: postgres
+    ports:
+      - 5432:5432
+    shm_size: 128mb
+    # or set shared memory limit when deploy via swarm stack
+    volumes:
+      - dados:/var/lib/postgresql/data
+      - type: tmpfs
+        target: /dev/shm
+        tmpfs:
+          size: 134217728 # 128*2^20 bytes = 128Mb
+      - ./scripts:/scripts
+      - ./scripts/start.sh:/docker-entrypoint-initdb.d/start.sh
+    networks:
+      - rede_mentoria      
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_USER: usergabs
+      POSTGRES_DB: projeto_escola
+  my-pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - 15432:80
+    environment:
+       PGADMIN_DEFAULT_EMAIL: "gabrihell@hotmail.com"
+       PGADMIN_DEFAULT_PASSWORD: "mysecretpassword"
+    networks:
+       - rede_mentoria 
+
+    

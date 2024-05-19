@@ -1,3 +1,5 @@
+package main;
+
 import java.util.Scanner;
 
 public class Controlador {
@@ -36,7 +38,7 @@ public class Controlador {
             boolean controleMenu = true;
 
             while(controleMenu){
-                System.out.println("Escola: "+ escola.getNomeEscola());
+                System.out.println("main.Escola: "+ escola.getNomeEscola());
                 System.out.println("-".repeat(10)+ "Menu"+ "-".repeat(10));
                 System.out.println("1 - Cadastrar\n2 - Procurar \n3 - Editar\n4 - Excluir");
 
@@ -63,7 +65,7 @@ public class Controlador {
     private void excluirMenu() {
         boolean controleMenu = true;
         while(controleMenu) {
-            System.out.println("Você deseja excluir: \n1- Turma\n2- Aluno\n3 - Menu Anterior");
+            System.out.println("Você deseja excluir: \n1- main.Turma\n2- main.Aluno\n3 - Menu Anterior");
             int opcao = input.nextInt();
             input.nextLine();
             switch (opcao) {
@@ -79,7 +81,7 @@ public class Controlador {
     private void atualizarMenu() {
         boolean controleMenu = true;
         while(controleMenu) {
-            System.out.println("Você deseja editar: \n1- Turma\n2- Aluno\n3 - Menu Anterior");
+            System.out.println("Você deseja editar: \n1- main.Turma\n2- main.Aluno\n3 - Menu Anterior");
             int opcao = input.nextInt();
             input.nextLine();
             switch (opcao) {
@@ -96,7 +98,7 @@ public class Controlador {
     private void procurarMenu() {
         boolean controleMenu = true;
         while(controleMenu) {
-            System.out.println("Você deseja procurar: \n1- Exibir Todas as Turmas\n2- Turma por nome\n3- Aluno\n4- Exibir todos os alunos\n5 - Menu Anterior");
+            System.out.println("Você deseja procurar: \n1- Exibir Todas as Turmas\n2- main.Turma por nome\n3- main.Aluno\n4- Exibir todos os alunos\n5 - Menu Anterior");
             int opcao = input.nextInt();
             input.nextLine();
             switch (opcao) {
@@ -116,7 +118,7 @@ public class Controlador {
         boolean controleMenu = true;
 
         while(controleMenu){
-            System.out.println("Você deseja cadastrar: \n1- Turma\n2- Aluno\n3 - Menu Anterior");
+            System.out.println("Você deseja cadastrar: \n1- main.Turma\n2- main.Aluno\n3 - Menu Anterior");
             int opcao = input.nextInt();
             input.nextLine();
             switch (opcao) {
@@ -149,7 +151,7 @@ public class Controlador {
 
 
     public Turma criarTurma() {
-        System.out.println("Informar o nome da Turma: ");
+        System.out.println("Informar o nome da main.Turma: ");
         String turmaNome = input.nextLine();
         return new Turma(turmaNome);
     }
@@ -186,7 +188,7 @@ public class Controlador {
         for (Turma turma  : escola.getTurmas()){
             turma.localizarAlunoId(idAluno);
         }
-        System.out.println("ERRO: Aluno não localizado!");
+        System.out.println("ERRO: main.Aluno não localizado!");
         return null;
     }
 

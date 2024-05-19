@@ -1,3 +1,5 @@
+package main;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,7 +90,7 @@ public class Escola {
         Turma turma = controlador.localizarTurma();
         if (turma != null){
             if (turma.getAlunos().isEmpty()){
-                System.out.println("Turma ["+turma.getNomeTurma()+"] excluida");
+                System.out.println("main.Turma ["+turma.getNomeTurma()+"] excluida");
                 if (controlador.confirmacao()){
                     turmas.remove(turma);
                 }
@@ -125,7 +127,7 @@ public class Escola {
             for(Turma turma:  turmas){
                 System.out.println(turma);
                 if (turma.getAlunos().isEmpty()){
-                    System.out.println("Turma Vazia!\n");
+                    System.out.println("main.Turma Vazia!\n");
                 }
                 for (Aluno aluno : turma.getAlunos()){
                     System.out.println(aluno);
@@ -157,7 +159,7 @@ public class Escola {
         if (turmas.size()<TAMANHO_MAX){
             Turma turma = controlador.criarTurma();
             adicionarTurma(turma);
-            System.out.println("Turma ["+turma.getNomeTurma()+"] Cadastrada com sucesso");
+            System.out.println("main.Turma ["+turma.getNomeTurma()+"] Cadastrada com sucesso");
         }else {
             System.out.println("ERRO: Não é possivel adicionar mais turmas");
         }
@@ -178,7 +180,7 @@ public class Escola {
             }
         }
 
-        System.out.println("ERRO: Turma não localizada!");
+        System.out.println("ERRO: main.Turma não localizada!");
         return null;
     }
 

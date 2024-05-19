@@ -1,3 +1,5 @@
+package main;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +41,7 @@ public class Turma {
 
     @Override
     public String toString() {
-        return "Turma: " + nomeTurma;
+        return "main.Turma: " + nomeTurma;
     }
 
     public Aluno localizarAlunoId(String idAluno) {
@@ -57,6 +59,6 @@ public class Turma {
 
     public void removerAluno(Aluno aluno) {
         alunos.remove(aluno);
-        System.out.println("Aluno removido!");
+        System.out.println("main.Aluno removido!");
     }
 }

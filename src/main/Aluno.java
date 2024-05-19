@@ -1,3 +1,5 @@
+package main;
+
 public class Aluno {
     private String id;
     private String primeiroNomeAluno;
@@ -19,7 +21,7 @@ public class Aluno {
     }
 
     public Aluno atualizarAluno(String primeiroNome, String sobrenome, int idade) {
-        System.out.println("Aluno: " + this.getPrimeiroNomeAluno() + " "+ this.getSobrenomeAluno() + " Idade: " + this.getIdade());
+        System.out.println("main.Aluno: " + this.getPrimeiroNomeAluno() + " "+ this.getSobrenomeAluno() + " Idade: " + this.getIdade());
         this.setPrimeiroNomeAluno(primeiroNome);
         this.setSobrenomeAluno(sobrenome);
         this.setIdade(idade);
@@ -57,7 +59,7 @@ public class Aluno {
 
     @Override
     public String toString() {
-        return "Aluno{ Id: "+ id +
+        return "main.Aluno{ Id: "+ id +
                 " Nome='" + primeiroNomeAluno+  " " + sobrenomeAluno + '\'' +
                 ", idade= " + idade  + "  }\n ";
 
