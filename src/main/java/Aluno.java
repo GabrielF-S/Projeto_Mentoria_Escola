@@ -1,5 +1,3 @@
-package main;
-
 public class Aluno {
     private String id;
     private String primeiroNomeAluno;
