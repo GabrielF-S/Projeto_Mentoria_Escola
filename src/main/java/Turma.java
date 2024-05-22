@@ -27,14 +27,14 @@ public class Turma {
         this.alunos = alunos;
     }
 
-    public void adicionarAluno(Aluno aluno){
+    public void adicionarAluno(Aluno aluno) throws Exception {
+        if (alunos.size() == TAMANHO_MAX){
+            throw new Exception("Turma Lotada");
+        }
         if (alunos.size()<TAMANHO_MAX){
             alunos.add(aluno);
-        }else {
-            System.out.println("ERRO: Não é possivel adicionar mais alunos nesta turma");
         }
     }
-
 
 
     @Override

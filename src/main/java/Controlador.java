@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Controlador {
     Escola escola;
     Scanner input= new Scanner(System.in);
-    public void init() {
+    public void init() throws Exception {
         System.out.println("Digite o nome da escola: ");
         String escolaNome = input.nextLine();
         escola = new Escola(escolaNome);
@@ -31,7 +31,7 @@ public class Controlador {
 
     }
 
-    public void menu(){
+    public void menu() throws Exception {
         try {
             boolean controleMenu = true;
 
@@ -113,7 +113,7 @@ public class Controlador {
         }
     }
 
-    public void cadastrarMenu(){
+    public void cadastrarMenu() throws Exception {
         boolean controleMenu = true;
 
         while(controleMenu){

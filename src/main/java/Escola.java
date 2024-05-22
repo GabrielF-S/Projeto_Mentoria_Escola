@@ -138,7 +138,7 @@ public class Escola {
     public void adicionarTurma(Turma turma){
         turmas.add(turma);
     }
-    public void cadastrarAluno() {
+    public void cadastrarAluno() throws Exception {
         if (turmas.isEmpty()){
             System.out.println("ERRO: Não é possivel cadastrar aluno sem ter turmas");
         }else{
