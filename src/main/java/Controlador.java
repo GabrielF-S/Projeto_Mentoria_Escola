@@ -60,7 +60,7 @@ public class Controlador {
 
     }
 
-    private void excluirMenu() {
+    private void excluirMenu() throws Exception {
         boolean controleMenu = true;
         while(controleMenu) {
             System.out.println("Você deseja excluir: \n1- main.Turma\n2- main.Aluno\n3 - Menu Anterior");

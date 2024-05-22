@@ -55,8 +55,11 @@ public class Turma {
     }
 
 
-    public void removerAluno(Aluno aluno) {
+    public void removerAluno(Aluno aluno) throws Exception {
+        if (!alunos.contains(aluno)){
+            throw new Exception("Aluno não localizado");
+        }
         alunos.remove(aluno);
-        System.out.println("main.Aluno removido!");
+        System.out.println("Aluno removido!");
     }
 }

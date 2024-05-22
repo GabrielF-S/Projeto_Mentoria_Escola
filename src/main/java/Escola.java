@@ -64,7 +64,7 @@ public class Escola {
     }
 
 
-    public void excluirAluno() {
+    public void excluirAluno() throws Exception {
 
         String idAluno = controlador.localizarAluno();
         Turma turma = controlador.localizarAlunoTurma(idAluno);
