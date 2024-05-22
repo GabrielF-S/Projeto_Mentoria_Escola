@@ -96,7 +96,8 @@ public class Controlador {
     private void procurarMenu() {
         boolean controleMenu = true;
         while(controleMenu) {
-            System.out.println("Você deseja procurar: \n1- Exibir Todas as Turmas\n2- main.Turma por nome\n3- main.Aluno\n4- Exibir todos os alunos\n5 - Menu Anterior");
+            System.out.println("Você deseja procurar: \n1- Exibir Todas as Turmas\n2- Turma por nome\n3- Aluno" +
+                    "\n4- Exibir todos os alunos\n5 - Menu Anterior");
             int opcao = input.nextInt();
             input.nextLine();
             switch (opcao) {
@@ -186,7 +187,7 @@ public class Controlador {
         for (Turma turma  : escola.getTurmas()){
             turma.localizarAlunoId(idAluno);
         }
-        System.out.println("ERRO: main.Aluno não localizado!");
+        System.out.println("ERRO: Aluno não localizado!");
         return null;
     }
 
