@@ -7,6 +7,11 @@ public class Escola {
     private List<Turma> turmas = new ArrayList<>();
 
     private List<Aluno> alunos = new ArrayList<>();
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
     private  Controlador controlador;
 
     public Escola(String nomeEscola) {
@@ -38,7 +43,6 @@ public class Escola {
                 if (aluno != null){
                     if (controlador.confirmacao()){
                         controlador.atualizarAluno(aluno);
-
                     }
 
                 }
@@ -174,11 +178,12 @@ public class Escola {
 
         for (Turma turma  : this.getTurmas()){
             if (turma.getNomeTurma().equalsIgnoreCase(nomeTurma)){
+                System.out.println(turma);
                 return turma;
             }
         }
 
-        System.out.println("ERRO: main.Turma não localizada!");
+        System.out.println("ERRO: Turma não localizada!");
         return null;
     }
 

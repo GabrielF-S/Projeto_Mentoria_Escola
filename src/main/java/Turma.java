@@ -39,7 +39,7 @@ public class Turma {
 
     @Override
     public String toString() {
-        return "main.Turma: " + nomeTurma;
+        return "Turma: " + nomeTurma +"\nAlunos: \n" + this.getAlunos();
     }
 
     public Aluno localizarAlunoId(String idAluno) {

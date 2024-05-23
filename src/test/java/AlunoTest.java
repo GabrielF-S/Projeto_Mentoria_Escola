@@ -3,14 +3,17 @@ import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 public class AlunoTest {
     private Escola escolaTest;
     private Turma turmaTest;
+
     @Before
     public void iniciar() {
         escolaTest = new Escola("School");
         turmaTest = new Turma("Turma A");
     }
+
     @Test
     public void atualizarPrimeiroNomeVerdadeiro() throws Exception {
         //cenario

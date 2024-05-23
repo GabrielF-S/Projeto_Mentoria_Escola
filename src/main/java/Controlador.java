@@ -26,6 +26,7 @@ public class Controlador {
         turma3.adicionarAluno(aluno3);
         escola.adicionarAluno(aluno3);
 
+
         menu();
 
 
@@ -145,7 +146,6 @@ public class Controlador {
 
         return new Aluno(alunoNome,sobrenome,idade);
     }
-
 
 
 
