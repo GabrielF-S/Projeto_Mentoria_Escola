@@ -1,7 +1,11 @@
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -30,6 +34,15 @@ public class EscolaTeste {
     }
 
     //atualziar aluno
+    @Test
+    public void deveAtualizarAlunoQuandoPassadoOsDados(){
+        //cenario
+
+        //ação
+        escolaTest.atualizarAluno();
+        //verificação
+        Assert.assertNotEquals("Mesmo nome: ","Pedro",alunoTest1.getPrimeiroNomeAluno());
+    }
 
     //atualizar turma
     //cenario

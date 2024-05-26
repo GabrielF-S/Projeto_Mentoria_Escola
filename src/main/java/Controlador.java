@@ -162,7 +162,7 @@ public class Controlador {
     }
 
     public String localizarAluno() {
-        System.out.println("Informe o id ou nome do aluno que deseja editar");
+        System.out.println("Informe o id ou nome do aluno");
         return input.nextLine();
     }
 
@@ -183,9 +183,10 @@ public class Controlador {
         return this.escola.localizarTurma(nomeTurma);
     }
 
-    public Turma localizarAlunoTurma(String idAluno) {
+    public Aluno localizarAlunoTurma(String idAluno) {
         for (Turma turma  : escola.getTurmas()){
-            turma.localizarAlunoId(idAluno);
+          return turma.localizarAlunoId(idAluno);
+
         }
         System.out.println("ERRO: Aluno não localizado!");
         return null;

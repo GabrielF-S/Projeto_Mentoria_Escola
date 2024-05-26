@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Escola {
     private String nomeEscola;
-    private final int TAMANHO_MAX =3;
+    private final int TAMANHO_MAX = 3;
     private List<Turma> turmas = new ArrayList<>();
 
     private List<Aluno> alunos = new ArrayList<>();
@@ -12,7 +12,7 @@ public class Escola {
         return alunos;
     }
 
-    private  Controlador controlador;
+    private Controlador controlador;
 
     public Escola(String nomeEscola) {
         this.nomeEscola = nomeEscola;
@@ -35,22 +35,18 @@ public class Escola {
     }
 
     public void atualizarAluno() {
-        if(!turmas.isEmpty()) {
+        if (!turmas.isEmpty()) {
             String idAluno = controlador.localizarAluno();
-            Turma turma = controlador.localizarAlunoTurma(idAluno);
-            if (turma != null) {
-                Aluno aluno = turma.localizarAlunoId(idAluno);
-                if (aluno != null){
-                    if (controlador.confirmacao()){
-                        controlador.atualizarAluno(aluno);
-                    }
-
+            Aluno aluno = controlador.localizarAlunoTurma(idAluno);
+            if (aluno != null) {
+                if (controlador.confirmacao()) {
+                    controlador.atualizarAluno(aluno);
                 }
+
             }
 
         }
     }
-
 
 
     public void editarTurmas() {
@@ -58,9 +54,9 @@ public class Escola {
         Turma turma = controlador.localizarTurma();
         if (turma != null) {
             String novoNome = controlador.novoNomeTurma();
-            if (controlador.confirmacao()){
+            if (controlador.confirmacao()) {
                 turma.setNomeTurma(novoNome);
-                System.out.println("Nome da turma atualizado ["+turma.getNomeTurma()+"]");
+                System.out.println("Nome da turma atualizado [" + turma.getNomeTurma() + "]");
             }
         }
 
@@ -71,33 +67,34 @@ public class Escola {
     public void excluirAluno() throws Exception {
 
         String idAluno = controlador.localizarAluno();
-        Turma turma = controlador.localizarAlunoTurma(idAluno);
-        if (turma != null){
-            Aluno aluno = turma.localizarAlunoId(idAluno);
-            if (aluno != null){
-                System.out.println("["+ aluno.getPrimeiroNomeAluno()+"]");
-                if (controlador.confirmacao()){
-                    turma.removerAluno(aluno);
-                }
-
-            }else {
-                System.out.println("ERRO: Não foi possivel excluir!");
+        Aluno aluno = controlador.localizarAlunoTurma(idAluno);
+        if (aluno != null) {
+            System.out.println("[" + aluno.getPrimeiroNomeAluno() + "]");
+            if (controlador.confirmacao()) {
+                Turma turma = localizarTurma(aluno);
+                turma.removerAluno(aluno);
             }
-        }
 
+        } else {
+            System.out.println("ERRO: Não foi possivel excluir!");
+        }
     }
+
+
+
+
 
     public void excluirTurmas() {
 
         Turma turma = controlador.localizarTurma();
-        if (turma != null){
-            if (turma.getAlunos().isEmpty()){
-                System.out.println("main.Turma ["+turma.getNomeTurma()+"] excluida");
-                if (controlador.confirmacao()){
+        if (turma != null) {
+            if (turma.getAlunos().isEmpty()) {
+                System.out.println("main.Turma [" + turma.getNomeTurma() + "] excluida");
+                if (controlador.confirmacao()) {
                     turmas.remove(turma);
                 }
 
-            }else {
+            } else {
                 System.out.println("ERRO: Não é possivel excluir turmas que contenham alunos");
             }
         }
@@ -105,33 +102,30 @@ public class Escola {
     }
 
     public void localizarAluno() {
-        if (!turmas.isEmpty()){
+        if (!turmas.isEmpty()) {
             String idAluno = controlador.localizarAluno();
 
-            Turma turma = controlador.localizarAlunoTurma(idAluno);
-        if (turma!=null){
-            Aluno aluno = turma.localizarAlunoId(idAluno);
-            if (aluno != null){
+            Aluno aluno = controlador.localizarAlunoTurma(idAluno);
+            if (aluno != null) {
                 System.out.println(aluno);
-            }
 
-        }else
-            System.out.println("ERRO: Nenhum aluno cadastrado");
+            } else
+                System.out.println("ERRO: Nenhum aluno cadastrado");
         }
 
     }
 
     public void localizarTodasTurmas() {
 
-        if (turmas.isEmpty()){
+        if (turmas.isEmpty()) {
             System.out.println("ERRO: Não há turmas cadastradas");
-        }else {
-            for(Turma turma:  turmas){
+        } else {
+            for (Turma turma : turmas) {
                 System.out.println(turma);
-                if (turma.getAlunos().isEmpty()){
+                if (turma.getAlunos().isEmpty()) {
                     System.out.println("main.Turma Vazia!\n");
                 }
-                for (Aluno aluno : turma.getAlunos()){
+                for (Aluno aluno : turma.getAlunos()) {
                     System.out.println(aluno);
                 }
             }
@@ -139,16 +133,17 @@ public class Escola {
 
     }
 
-    public void adicionarTurma(Turma turma){
+    public void adicionarTurma(Turma turma) {
         turmas.add(turma);
     }
+
     public void cadastrarAluno() throws Exception {
-        if (turmas.isEmpty()){
+        if (turmas.isEmpty()) {
             System.out.println("ERRO: Não é possivel cadastrar aluno sem ter turmas");
-        }else{
+        } else {
             Aluno aluno = controlador.criarAluno();
             Turma turma = controlador.localizarTurma();
-            if (turma !=null){
+            if (turma != null) {
                 turma.adicionarAluno(aluno);
                 alunos.add(aluno);
             }
@@ -158,11 +153,11 @@ public class Escola {
     }
 
     public void cadastrarTurma() {
-        if (turmas.size()<TAMANHO_MAX){
+        if (turmas.size() < TAMANHO_MAX) {
             Turma turma = controlador.criarTurma();
             adicionarTurma(turma);
-            System.out.println("main.Turma ["+turma.getNomeTurma()+"] Cadastrada com sucesso");
-        }else {
+            System.out.println("main.Turma [" + turma.getNomeTurma() + "] Cadastrada com sucesso");
+        } else {
             System.out.println("ERRO: Não é possivel adicionar mais turmas");
         }
     }
@@ -172,13 +167,16 @@ public class Escola {
     }
 
     public Turma localizarTurma(String nomeTurma) {
-        if (this.getTurmas().isEmpty()){
+        if (this.getTurmas().isEmpty()) {
             System.out.println("ERRO: Não há turmas cadastradas");
         }
 
-        for (Turma turma  : this.getTurmas()){
-            if (turma.getNomeTurma().equalsIgnoreCase(nomeTurma)){
+        for (Turma turma : this.getTurmas()) {
+            if (turma.getNomeTurma().equalsIgnoreCase(nomeTurma)) {
                 System.out.println(turma);
+                for (Aluno alunos : turma.getAlunos()) {
+                    System.out.println(alunos);
+                }
                 return turma;
             }
         }
@@ -188,11 +186,21 @@ public class Escola {
     }
 
     public void localizarTodosAlunos() {
-        for (Aluno aluno : alunos){
+        for (Aluno aluno : alunos) {
             System.out.println(aluno);
         }
     }
-    public void adicionarAluno(Aluno aluno){
+
+    public void adicionarAluno(Aluno aluno) {
         alunos.add(aluno);
+    }
+
+    public Turma localizarTurma(Aluno aluno){
+        for (Turma turma: turmas){
+            if (turmas.contains(aluno)){
+                return turma;
+            }
+        }
+        return null;
     }
 }
