@@ -15,7 +15,7 @@ public class AlunoTest {
     }
 
     @Test
-    public void atualizarPrimeiroNomeVerdadeiro() throws Exception {
+    public void deveAtualizarPrimeiroNomeQuandoVerdadeiro() throws Exception {
         //cenario
         Aluno alunoTest = new Aluno("Joao", "Siqueira",
                 13);
@@ -28,7 +28,7 @@ public class AlunoTest {
         MatcherAssert.assertThat(alunoTest.getPrimeiroNomeAluno(), CoreMatchers.is("Jose"));
     }
     @Test
-    public void atualizarSobrenomeVerdadeiro() throws Exception {
+    public void deveAtualizarSobrenomeQuandoVerdadeiro() throws Exception {
         //cenario
         Aluno alunoTest = new Aluno("Joao", "Siqueira",
                 13);
@@ -41,7 +41,7 @@ public class AlunoTest {
         MatcherAssert.assertThat(alunoTest.getSobrenomeAluno(), CoreMatchers.is("Francisco"));
     }
     @Test
-    public void atualizarIdadeVerdadeiro() throws Exception {
+    public void deveAtualizarIdadeQuandoVerdadeiro() throws Exception {
         //cenario
         Aluno alunoTest = new Aluno("Joao", "Siqueira",
                 13);
@@ -54,7 +54,7 @@ public class AlunoTest {
         MatcherAssert.assertThat(alunoTest.getIdade(), CoreMatchers.is(15));
     }
     @Test
-    public void verificarID() {
+    public void deveVerificarIDUnico() {
         //cenario
         Aluno alunoTest1 = new Aluno("Joao", "Siqueira",
                 13);
@@ -64,7 +64,7 @@ public class AlunoTest {
         Assert.assertNotSame("ID iguais", alunoTest1.getId(), alunoTest2.getId());
     }
     @Test
-    public void atualizarPrimeiroNomeFalso() throws Exception {
+    public void deveVeirficarSeNomeMudou() throws Exception {
         //cenario
         Aluno alunoTest = new Aluno("Joao", "Siqueira",
                 13);
@@ -77,7 +77,7 @@ public class AlunoTest {
         MatcherAssert.assertThat(alunoTest.getPrimeiroNomeAluno(), CoreMatchers.is(CoreMatchers.not("Joao")));
     }
     @Test
-    public void atualizarSobrenomeFalso() throws Exception {
+    public void deveVerificarSobrenomeNaoMudou() throws Exception {
         //cenario
         Aluno alunoTest = new Aluno("Joao", "Siqueira",
                 13);
@@ -90,7 +90,7 @@ public class AlunoTest {
         MatcherAssert.assertThat(alunoTest.getSobrenomeAluno(), CoreMatchers.is(CoreMatchers.is(CoreMatchers.not("Siqueira"))));
     }
     @Test
-    public void atualizarIdadeFalso() throws Exception {
+    public void deveVerificarSeatualizarIdadeFunciou() throws Exception {
         //cenario
         Aluno alunoTest = new Aluno("Joao", "Siqueira",
                 13);

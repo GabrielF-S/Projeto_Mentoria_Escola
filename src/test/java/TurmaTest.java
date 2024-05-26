@@ -25,7 +25,7 @@ public class TurmaTest {
                 13);
     }
     @Test
-    public void adicionarAlunoQuandoTemVaga() throws Exception {
+    public void deveAdicionarAlunoQuandoTemVaga() throws Exception {
         //cenario
         Aluno alunoTest = new Aluno("Joao","Siqueira",
                 13);
@@ -37,7 +37,7 @@ public class TurmaTest {
         Assert.assertTrue(turmaTest.getAlunos().contains(alunoTest));
     }
     @Test(expected= Exception.class)
-    public void adicionarAlunoQuandoNaoTemVaga() throws Exception {
+    public void naoDeveadicionarAlunoQuandoNaoTemVaga() throws Exception {
         //cenario
         Aluno alunoTest4 = new Aluno("Francisco","Neto",
                 13);
@@ -51,7 +51,7 @@ public class TurmaTest {
         this.turmaTest.adicionarAluno(alunoTest4);
     }
     @Test
-    public void adicionarAlunoQuandoNaoTemVaga2() {
+    public void naoDeveadicionarAlunoQuandoNaoTemVaga2() {
         //cenario
         Aluno alunoTest4 = new Aluno("Francisco","Neto",
                 13);
@@ -124,7 +124,7 @@ public class TurmaTest {
         error.checkThat(alunoTest3.getId(), CoreMatchers.is(buscaAluno.getId()));
     }
     @Test
-    public void localizarAlunoFalso() throws Exception {
+    public void naoDevelocalizarAlunoQuandoIDFalso() throws Exception {
         //cenario
         this.escolaTest.adicionarTurma(turmaTest);
         this.turmaTest.adicionarAluno(alunoTest);
@@ -137,7 +137,7 @@ public class TurmaTest {
     }
 
     @Test
-    public void excluirAlunoVerdadeiro() throws Exception {
+    public void deveExcluirAlunoQuandoVerdadeiro() throws Exception {
         //cenario
         this.escolaTest.adicionarTurma(turmaTest);
         this.turmaTest.adicionarAluno(alunoTest);
@@ -150,7 +150,7 @@ public class TurmaTest {
 
     }
     @Test
-    public void excluirAlunoFalso() throws Exception {
+    public void naoDeveExcluirAlunoQuandoFalso() throws Exception {
         //cenario
         this.escolaTest.adicionarTurma(turmaTest);
         this.turmaTest.adicionarAluno(alunoTest);
