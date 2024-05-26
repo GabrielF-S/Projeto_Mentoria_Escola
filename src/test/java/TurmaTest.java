@@ -73,7 +73,7 @@ public class TurmaTest {
     }
 
     @Test
-    public void localizarAlunoVerdadeiro() throws Exception {
+    public void deveLocalizarAlunoQuandoPassarOID() throws Exception {
         //cenario
         this.escolaTest.adicionarTurma(turmaTest);
         this.turmaTest.adicionarAluno(alunoTest);
@@ -85,7 +85,31 @@ public class TurmaTest {
         Assert.assertEquals(buscaAluno, alunoTest3);
     }
     @Test
-    public void localizarAlunoVerdadeiro2() throws Exception {
+    public void deveLocalizarAlunoQuandoPassarONome() throws Exception {
+        //cenario
+        this.escolaTest.adicionarTurma(turmaTest);
+        this.turmaTest.adicionarAluno(alunoTest);
+        this.turmaTest.adicionarAluno(alunoTest2);
+        this.turmaTest.adicionarAluno(alunoTest3);
+        //ação
+        Aluno buscaAluno =turmaTest.localizarAlunoId(alunoTest3.getPrimeiroNomeAluno());
+        //verificação
+        Assert.assertEquals(buscaAluno, alunoTest3);
+    }
+    @Test
+    public void naoDeveLocalizarAlunoQuandoPassarONome() throws Exception {
+        //cenario
+        this.escolaTest.adicionarTurma(turmaTest);
+        this.turmaTest.adicionarAluno(alunoTest);
+        this.turmaTest.adicionarAluno(alunoTest2);
+        this.turmaTest.adicionarAluno(alunoTest3);
+        //ação
+        Aluno buscaAluno =turmaTest.localizarAlunoId("Pedro");
+        //verificação
+        Assert.assertNull(buscaAluno);
+    }
+    @Test
+    public void DeveLocalizarAlunoQuandoPassarOID2() throws Exception {
         //cenario
         this.escolaTest.adicionarTurma(turmaTest);
         this.turmaTest.adicionarAluno(alunoTest);
