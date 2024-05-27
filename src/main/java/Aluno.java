@@ -14,7 +14,6 @@ public class Aluno {
     private String generatedId(String primeiroNomeAluno, String sobrenomeAluno, int idade) {
         int num = (int)(Math.random()*1001);
         String salt = String.valueOf(num);
-
         return String.valueOf(primeiroNomeAluno.length()) + String.valueOf(sobrenomeAluno.length()) + String.valueOf(idade) + salt;
     }
 

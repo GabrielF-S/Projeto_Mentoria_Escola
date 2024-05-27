@@ -136,12 +136,9 @@ public class Controlador {
 
     public Aluno criarAluno(){
 
-        System.out.println("Digite o nome do aluno");
-        String alunoNome = input.nextLine();
-        System.out.println("Digite o sobrenome do aluno");
-        String sobrenome = input.nextLine();
-        System.out.println("Digite o a idade do aluno");
-        int idade = input.nextInt();
+        String alunoNome = SolicitarNome();
+        String sobrenome = SolicitarSobrenome();
+        int idade = SolicitarIdade();
         input.nextLine();
 
         return new Aluno(alunoNome,sobrenome,idade);
@@ -166,15 +163,27 @@ public class Controlador {
         return input.nextLine();
     }
 
-    public void atualizarAluno(Aluno aluno) {
+    public Aluno atualizarAluno(Aluno aluno) {
+        String novoNome = SolicitarNome();
+        String novoSobrenome = SolicitarSobrenome();
+        int novaIdade = SolicitarIdade();
+       return aluno.atualizarAluno(novoNome, novoSobrenome, novaIdade);
+    }
+
+    public String SolicitarNome(){
         System.out.println("Informe o nome do aluno: ");
         String novoNome = input.nextLine();
+        return novoNome;
+    }
+    public String SolicitarSobrenome(){
         System.out.println("Informe o sobrenome do aluno: ");
-        String novoSobrenome = input.nextLine();
+        String novoSobrenomee = input.nextLine();
+        return novoSobrenomee;
+    }
+    public int SolicitarIdade(){
         System.out.println("Informe a idade do aluno: ");
-        int novaIdade = input.nextInt();
-        input.nextLine();
-        aluno.atualizarAluno(novoNome, novoSobrenome, novaIdade);
+        int novaidade = input.nextInt();
+        return novaidade;
     }
 
     public Turma localizarTurma() {
@@ -185,8 +194,10 @@ public class Controlador {
 
     public Aluno localizarAlunoTurma(String idAluno) {
         for (Turma turma  : escola.getTurmas()){
-          return turma.localizarAlunoId(idAluno);
-
+          Aluno aluno = turma.localizarAlunoId(idAluno);
+          if (aluno!=null){
+              return aluno;
+          }
         }
         System.out.println("ERRO: Aluno não localizado!");
         return null;
@@ -195,7 +206,10 @@ public class Controlador {
     public boolean confirmacao(){
         System.out.println("Confirmar a ação? y/n");
         String confirmacao = input.nextLine();
-        return confirmacao.equalsIgnoreCase("y") || confirmacao.equalsIgnoreCase("yes") || confirmacao.equalsIgnoreCase("s") || confirmacao.equalsIgnoreCase("sim");
+        return confirmacao.equalsIgnoreCase("y") ||
+                confirmacao.equalsIgnoreCase("yes") ||
+                confirmacao.equalsIgnoreCase("s") ||
+                confirmacao.equalsIgnoreCase("sim");
 
     }
 }

@@ -1,47 +1,57 @@
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-
 public class EscolaTeste {
 
-    private Escola escolaTest;
-    private Turma turmaTestA;
-    private Controlador controladorTest;
-    private Aluno alunoTest1;
+    public Escola escolaTest;
+    public Turma turmaTestA;
+    @Mock
+    public Controlador controladorTest;
+    public Aluno alunoTest1;
 
-    private final InputStream originalSystemIn = System.in;
-    private ByteArrayInputStream testIn;
+
+
     @Before
     public void inicio() {
         escolaTest = new Escola("School");
         turmaTestA = new Turma("Turma A");
-        controladorTest = new Controlador();
+        controladorTest = Mockito.mock(Controlador.class);
         alunoTest1 = new Aluno("Pedro", "Assis", 16);
         escolaTest.setControlador(controladorTest);
     }
 
-    @After
-    public void restoreSystemIn() {
-        System.setIn(originalSystemIn);
-    }
 
     //atualziar aluno
     @Test
-    public void deveAtualizarAlunoQuandoPassadoOsDados(){
+    public void deveAtualizarAlunoQuandoPassadoOsDados() throws Exception {
         //cenario
+        escolaTest.adicionarTurma(turmaTestA);
+        turmaTestA.adicionarAluno(alunoTest1);
+        escolaTest.adicionarAluno(alunoTest1);
+
+        Mockito.when(controladorTest.localizarAluno()).thenReturn(alunoTest1.getId());
+        Mockito.when(controladorTest.localizarAlunoTurma(alunoTest1.getId())).thenReturn(alunoTest1);
+        Mockito.when(controladorTest.confirmacao()).thenReturn(true);
+        Mockito.when(controladorTest.SolicitarNome()).thenReturn("João");
+        Mockito.when(controladorTest.SolicitarSobrenome()).thenReturn("Santos");
+        Mockito.when(controladorTest.SolicitarIdade()).thenReturn(15);
+        Mockito.when(controladorTest.atualizarAluno(alunoTest1)).thenCallRealMethod();
+
+
+
 
         //ação
         escolaTest.atualizarAluno();
+
         //verificação
-        Assert.assertNotEquals("Mesmo nome: ","Pedro",alunoTest1.getPrimeiroNomeAluno());
+
+        MatcherAssert.assertThat(alunoTest1.getPrimeiroNomeAluno(), CoreMatchers.is("João"));
+
     }
 
     //atualizar turma
