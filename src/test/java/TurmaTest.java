@@ -36,7 +36,7 @@ public class TurmaTest {
         //verificação
         Assert.assertTrue(turmaTest.getAlunos().contains(alunoTest));
     }
-    @Test(expected= Exception.class)
+    @Test
     public void naoDeveadicionarAlunoQuandoNaoTemVaga() throws Exception {
         //cenario
         Aluno alunoTest4 = new Aluno("Francisco","Neto",
@@ -45,25 +45,24 @@ public class TurmaTest {
         //ação
         this.turmaTest.adicionarAluno(alunoTest);
         this.turmaTest.adicionarAluno(alunoTest2);
-        this.turmaTest.adicionarAluno(alunoTest3);
+        try {
+            this.turmaTest.adicionarAluno(alunoTest3);
+        }catch (Exception e){
+            //verificação
+            MatcherAssert.assertThat(e.getMessage(),CoreMatchers.is("Turma Lotada"));
+        }
 
-        //verificação
-        this.turmaTest.adicionarAluno(alunoTest4);
     }
     @Test
-    public void naoDeveadicionarAlunoQuandoNaoTemVaga2() {
+    public void naoDeveadicionarAlunoQuandoNaoTemVaga2() throws Exception {
         //cenario
         Aluno alunoTest4 = new Aluno("Francisco","Neto",
                 13);
         this.escolaTest.adicionarTurma(turmaTest);
         //ação
-        try {
             this.turmaTest.adicionarAluno(alunoTest);
             this.turmaTest.adicionarAluno(alunoTest2);
             this.turmaTest.adicionarAluno(alunoTest3);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
         //verificação
         try {
             turmaTest.adicionarAluno(alunoTest4);

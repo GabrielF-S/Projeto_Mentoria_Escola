@@ -4,8 +4,8 @@ public class Controlador {
     Escola escola;
     Scanner input= new Scanner(System.in);
     public void init() throws Exception {
-        System.out.println("Digite o nome da escola: ");
-        String escolaNome = input.nextLine();
+
+        String escolaNome = solicitarNomeEscola();
         escola = new Escola(escolaNome);
         escola.setControlador(this);
 
@@ -25,13 +25,8 @@ public class Controlador {
         Aluno aluno3 = new Aluno("Mary","Doe", 17);
         turma3.adicionarAluno(aluno3);
         escola.adicionarAluno(aluno3);
-
-
         menu();
-
-
     }
-
     public void menu() throws Exception {
         try {
             boolean controleMenu = true;
@@ -43,29 +38,29 @@ public class Controlador {
 
                 System.out.println("Insira o numero da opção do Menu");
 
-                int opcao = input.nextInt();
+                int opcao = selecionarOpcao();
                 switch (opcao) {
-                    case 1 -> cadastrarMenu();
-                    case 2 -> procurarMenu();
-                    case 3 -> atualizarMenu();
-                    case 4 -> excluirMenu();
+                    case 1 -> this.cadastrarMenu();
+                    case 2 -> this.procurarMenu();
+                    case 3 -> this.atualizarMenu();
+                    case 4 -> this.excluirMenu();
                     default -> {
                         controleMenu = false;
                         System.out.println("Encerrando...");
                     }
                 }
             }
-        }catch (RuntimeException e){
+        }catch (Throwable e){
             System.out.println("ERRO FATAL: FINALIZANDO PROGRAMA");
         }
 
     }
 
-    private void excluirMenu() throws Exception {
+    private void excluirMenu() throws Throwable {
         boolean controleMenu = true;
         while(controleMenu) {
             System.out.println("Você deseja excluir: \n1- main.Turma\n2- main.Aluno\n3 - Menu Anterior");
-            int opcao = input.nextInt();
+            int opcao = selecionarOpcao();
             input.nextLine();
             switch (opcao) {
                 case 1 -> escola.excluirTurmas();
@@ -77,15 +72,15 @@ public class Controlador {
         }
     }
 
-    private void atualizarMenu() {
+    private void atualizarMenu() throws Exception {
         boolean controleMenu = true;
         while(controleMenu) {
             System.out.println("Você deseja editar: \n1- main.Turma\n2- main.Aluno\n3 - Menu Anterior");
-            int opcao = input.nextInt();
+            int opcao = selecionarOpcao();
             input.nextLine();
             switch (opcao) {
                 case 1 -> escola.editarTurmas();
-                case 2 -> escola.atualizarAluno();
+                case 2 -> escola.editarAluno();
                 case 3 -> {
                     controleMenu = false;
                 }
@@ -94,12 +89,12 @@ public class Controlador {
 
     }
 
-    private void procurarMenu() {
+    private void procurarMenu() throws Exception {
         boolean controleMenu = true;
         while(controleMenu) {
             System.out.println("Você deseja procurar: \n1- Exibir Todas as Turmas\n2- Turma por nome\n3- Aluno" +
                     "\n4- Exibir todos os alunos\n5 - Menu Anterior");
-            int opcao = input.nextInt();
+            int opcao = selecionarOpcao();
             input.nextLine();
             switch (opcao) {
                 case 1 -> escola.localizarTodasTurmas();
@@ -119,7 +114,7 @@ public class Controlador {
 
         while(controleMenu){
             System.out.println("Você deseja cadastrar: \n1- main.Turma\n2- main.Aluno\n3 - Menu Anterior");
-            int opcao = input.nextInt();
+            int opcao = selecionarOpcao();
             input.nextLine();
             switch (opcao) {
                 case 1 -> escola.cadastrarTurma();
@@ -133,13 +128,15 @@ public class Controlador {
         }
 
     }
+    public int selecionarOpcao(){
+        int opcao =  input.nextInt();
+        return opcao;
+    }
 
     public Aluno criarAluno(){
-
-        String alunoNome = SolicitarNome();
-        String sobrenome = SolicitarSobrenome();
-        int idade = SolicitarIdade();
-        input.nextLine();
+        String alunoNome = solicitarNomeAluno();
+        String sobrenome = solicitarSobrenomeAluno();
+        int idade = solicitarIdadeAluno();
 
         return new Aluno(alunoNome,sobrenome,idade);
     }
@@ -147,48 +144,55 @@ public class Controlador {
 
 
     public Turma criarTurma() {
-        System.out.println("Informar o nome da main.Turma: ");
-        String turmaNome = input.nextLine();
+        String turmaNome = solicitarNomeTurma();
         return new Turma(turmaNome);
     }
 
     public String novoNomeTurma() {
-        System.out.println("Informe o novo nome da turma");
-
-        return input.nextLine();
+        String novoNomeTurma = this.solicitarNomeTurma();
+        return novoNomeTurma;
     }
 
     public String localizarAluno() {
-        System.out.println("Informe o id ou nome do aluno");
-        return input.nextLine();
+       String nomeAluno = solicitarNomeAlunoOuID();
+        return nomeAluno;
+    }
+
+    public String solicitarNomeAlunoOuID() {
+        System.out.println("Informe o nome ou o ID do aluno");
+       return input.nextLine();
     }
 
     public Aluno atualizarAluno(Aluno aluno) {
-        String novoNome = SolicitarNome();
-        String novoSobrenome = SolicitarSobrenome();
-        int novaIdade = SolicitarIdade();
+        String novoNome = this.solicitarNomeAluno();
+        String novoSobrenome = this.solicitarSobrenomeAluno();
+        int novaIdade = this.solicitarIdadeAluno();
        return aluno.atualizarAluno(novoNome, novoSobrenome, novaIdade);
     }
 
-    public String SolicitarNome(){
+    public String solicitarNomeAluno(){
         System.out.println("Informe o nome do aluno: ");
         String novoNome = input.nextLine();
         return novoNome;
     }
-    public String SolicitarSobrenome(){
+    public String solicitarSobrenomeAluno(){
         System.out.println("Informe o sobrenome do aluno: ");
         String novoSobrenomee = input.nextLine();
         return novoSobrenomee;
     }
-    public int SolicitarIdade(){
+    public int solicitarIdadeAluno(){
         System.out.println("Informe a idade do aluno: ");
         int novaidade = input.nextInt();
         return novaidade;
     }
-
-    public Turma localizarTurma() {
+    public String solicitarNomeTurma(){
         System.out.println("Informe o nome da turma: ");
         String nomeTurma = input.nextLine();
+        return nomeTurma;
+    }
+
+    public Turma localizarTurma() throws Exception {
+        String nomeTurma = solicitarNomeTurma();
         return this.escola.localizarTurma(nomeTurma);
     }
 
@@ -204,12 +208,23 @@ public class Controlador {
     }
 
     public boolean confirmacao(){
-        System.out.println("Confirmar a ação? y/n");
-        String confirmacao = input.nextLine();
+        String confirmacao = solicitarConfirmacao();
         return confirmacao.equalsIgnoreCase("y") ||
                 confirmacao.equalsIgnoreCase("yes") ||
                 confirmacao.equalsIgnoreCase("s") ||
                 confirmacao.equalsIgnoreCase("sim");
 
+    }
+
+    public String solicitarConfirmacao(){
+        System.out.println("Confirmar a ação? y/n");
+        String confirmacao = input.nextLine();
+        return  confirmacao;
+    }
+
+    public String solicitarNomeEscola(){
+        System.out.println("Digite o nome da escola: ");
+        String escolaNome = input.nextLine();
+        return  escolaNome;
     }
 }

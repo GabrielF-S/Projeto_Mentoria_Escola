@@ -23,10 +23,6 @@ public class Turma {
         return alunos;
     }
 
-    public void setAlunos(List<Aluno> alunos) {
-        this.alunos = alunos;
-    }
-
     public void adicionarAluno(Aluno aluno) throws Exception {
         if (alunos.size() == TAMANHO_MAX){
             throw new Exception("Turma Lotada");
@@ -62,4 +58,5 @@ public class Turma {
         alunos.remove(aluno);
         System.out.println("Aluno removido!");
     }
+
 }
