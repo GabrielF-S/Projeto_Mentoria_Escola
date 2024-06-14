@@ -6,6 +6,7 @@ import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -47,7 +48,7 @@ public class TurmaServiceImplTest {
         Aluno alunoTeste = alunoService.criarAluno();
 
         //ação
-        turmaServiceSpy.adicionarAluno(alunoTeste,turmaTest);
+        turmaServiceSpy.adicionarAluno(alunoTeste);
        //verificação
         Assert.assertTrue(turmaTest.getAlunos().contains(alunoTeste));
     }
@@ -57,10 +58,11 @@ public class TurmaServiceImplTest {
         when(alunoService.solicitarNomeAluno()).thenReturn("Phil");
         when(alunoService.solicitarSobrenomeAluno()).thenReturn("doe");
         when(alunoService.solicitarIdadeAluno()).thenReturn(27);
+        when(alunoService.criarAluno()).thenCallRealMethod();
         Aluno alunoTeste = alunoService.criarAluno();
         Aluno alunoTest2 = new Aluno("John","Doe",27);
         //ação
-        turmaServiceSpy.adicionarAluno(alunoTeste, turmaTest);
+        turmaServiceSpy.adicionarAluno(alunoTeste);
         //verificação
         Assert.assertFalse(turmaTest.getAlunos().contains(alunoTest2));
     }
@@ -160,10 +162,11 @@ public class TurmaServiceImplTest {
         when(alunoService.solicitarSobrenomeAluno()).thenReturn("Sobrenome");
         when(alunoService.solicitarIdadeAluno()).thenReturn(23);
         Aluno alunoTest = alunoService.criarAluno();
-        turmaService.adicionarAluno(alunoTest,turmaTest);
+        turmaServiceSpy.adicionarAluno(alunoTest);
         //ação
-          turmaServiceSpy.removerAluno();
+        turmaServiceSpy.removerAluno(alunoTest);
         //verificação
+        Assert.assertFalse(turmaServiceSpy.turmas.contains(alunoTest));
 
     }
 

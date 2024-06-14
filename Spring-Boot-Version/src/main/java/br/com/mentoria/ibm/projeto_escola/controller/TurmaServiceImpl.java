@@ -67,6 +67,7 @@ public class TurmaServiceImpl implements TurmaService {
                 if (alunoList.equals(aluno)) {
                     turma.removerAluno(aluno);
                     System.out.println("Aluno :" + aluno.getPrimeiroNomeAluno() + " Removido");
+                    break;
                 }
             }
         }
