@@ -12,14 +12,14 @@ public class TurmaServiceImpl implements TurmaService {
     Inputs scanner = new Inputs();
 
 
-    @Override
-    public void adicionarAluno(Aluno aluno, Turma verificar) throws Exception {
-        if (verificar.getAlunos().size() == verificar.getTAMANHO_MAX()) {
-            throw new Exception("Turma cheia!");
-        } else {
-            verificar.setAlunos(aluno);
-        }
-    }
+//    @Override
+//    public void adicionarAluno(Aluno aluno, Turma verificar) throws Exception {
+//        if (verificar.getAlunos().size() == verificar.getTAMANHO_MAX()) {
+//            throw new Exception("Turma cheia!");
+//        } else {
+//            verificar.setAlunos(aluno);
+//        }
+//    }
 
     @Override
     public void adicionarAluno(Aluno aluno) throws Exception {
@@ -50,15 +50,15 @@ public class TurmaServiceImpl implements TurmaService {
         throw new Exception("Aluno não Localizado!");
     }
 
-    @Override
-    public void removerAluno(Aluno aluno, Turma verificar) {
-        if (verificar.getAlunos().contains(aluno)) {
-            List<Aluno> turmas = verificar.getAlunos();
-            turmas.remove(aluno);
-            System.out.println("Aluno :" + aluno.getPrimeiroNomeAluno() + " Removido");
-        }
-
-    }
+//    @Override
+//    public void removerAluno(Aluno aluno, Turma verificar) {
+//        if (verificar.getAlunos().contains(aluno)) {
+//            List<Aluno> turmas = verificar.getAlunos();
+//            turmas.remove(aluno);
+//            System.out.println("Aluno :" + aluno.getPrimeiroNomeAluno() + " Removido");
+//        }
+//
+//    }
 
     @Override
     public void removerAluno(Aluno aluno) throws Exception {
@@ -85,12 +85,19 @@ public class TurmaServiceImpl implements TurmaService {
     }
 
     @Override
-    public Turma criarTurma(String nomeTurma) {
+    public Turma criarTurma() {
+        String nomeTurma = solicitarNomeTurma();
         if (turmas.size()<3){
             Turma turma =new Turma(nomeTurma);
             turmas.add(turma);
             return turma;
         }
         return null;
+    }
+
+    @Override
+    public String solicitarNovoNomeTurma() {
+        System.out.println("Informe o novo nome da turma");
+        return scanner.retornarString();
     }
 }

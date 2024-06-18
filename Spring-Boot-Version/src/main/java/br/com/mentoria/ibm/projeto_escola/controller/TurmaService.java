@@ -5,13 +5,13 @@ import br.com.mentoria.ibm.projeto_escola.model.Turma;
 
 public interface TurmaService {
 
-    void adicionarAluno(Aluno aluno, Turma turma) throws Exception;
+//    void adicionarAluno(Aluno aluno, Turma turma) throws Exception;
 
     void adicionarAluno(Aluno aluno) throws Exception;
 
     Aluno localizarAlunoID(String id) throws Exception;
 
-    void removerAluno(Aluno aluno, Turma turma);
+//    void removerAluno(Aluno aluno, Turma turma);
 
     void removerAluno(Aluno aluno) throws Exception;
 
@@ -19,6 +19,7 @@ public interface TurmaService {
 
     boolean isCheia(Turma turma);
 
+    Turma criarTurma();
 
-    Turma criarTurma(String nomeTurma);
+    String solicitarNovoNomeTurma();
 }

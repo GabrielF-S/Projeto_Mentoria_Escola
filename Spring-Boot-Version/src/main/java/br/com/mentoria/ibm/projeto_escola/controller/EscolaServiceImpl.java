@@ -92,18 +92,17 @@ public class EscolaServiceImpl implements EscolaService {
 
     @Override
     public Turma criarTurma() {
-        String nomeTurma = turmaService.solicitarNomeTurma();
-        return turmaService.criarTurma(nomeTurma);
+        return turmaService.criarTurma();
     }
 
     @Override
     public void cadastrarTurma() {
         if (escola.getTurmas().size() < escola.getTAMANHO_MAX()) {
             Turma turmaEscola = criarTurma();
-            System.out.println("Turma criada");
             if (escola.getTurmas().contains(turmaEscola)) {
                 System.out.println("Turma já cadastrada");
             } else {
+                System.out.println("Turma criada");
                 List<Turma> turmas = escola.getTurmas();
                 turmas.add(turmaEscola);
                 escola.setTurmas(turmas);
@@ -116,7 +115,7 @@ public class EscolaServiceImpl implements EscolaService {
         String nomeTurma = turmaService.solicitarNomeTurma();
         Turma turma = this.localizarUmaTurma(nomeTurma);
         if (escola.getTurmas().contains(turma)) {
-            turma.setNomeTurma(turmaService.solicitarNomeTurma());
+            turma.setNomeTurma(turmaService.solicitarNovoNomeTurma());
             System.out.println("Nome da turma alterado para: " + turma.getNomeTurma());
         }
     }
