@@ -5,7 +5,7 @@ import br.com.mentoria.ibm.projeto_escola.controller.EscolaServiceImpl;
 import br.com.mentoria.ibm.projeto_escola.model.Escola;
 
 import java.util.Scanner;
-public class Controlador {
+public class Menus {
     Escola escola;
     Scanner input= new Scanner(System.in);
 
