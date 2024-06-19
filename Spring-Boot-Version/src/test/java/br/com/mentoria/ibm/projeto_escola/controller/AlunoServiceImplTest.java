@@ -53,9 +53,9 @@ public class AlunoServiceImplTest {
     public void deveVerificarSeAtualizouNomeDoAluno() {
         //cenario
         Aluno aluno = new Aluno("Jose", "Alguém", 27);
-        doReturn("John").when(alunoServiceSpy).solicitarNomeAluno();
-        doReturn("Doe").when(alunoServiceSpy).solicitarSobrenomeAluno();
-        doReturn(27).when(alunoServiceSpy).solicitarIdadeAluno();
+        doReturn("John").when(alunoServiceSpy).solicitarNovoNomeAluno();
+        doReturn("Doe").when(alunoServiceSpy).solicitarNovoSobrenomeAluno();
+        doReturn(27).when(alunoServiceSpy).solicitarNovaIdadeAluno();
         //ação
         alunoServiceSpy.atualizarAluno(aluno);
         //verificação
@@ -66,9 +66,9 @@ public class AlunoServiceImplTest {
     public void deveVerificarSeAtualizouSobrenomeDoAluno() {
         //cenario
         Aluno aluno = new Aluno("Jose", "Alguém", 27);
-        doReturn("John").when(alunoServiceSpy).solicitarNomeAluno();
-        doReturn("Doe").when(alunoServiceSpy).solicitarSobrenomeAluno();
-        doReturn(27).when(alunoServiceSpy).solicitarIdadeAluno();
+        doReturn("John").when(alunoServiceSpy).solicitarNovoNomeAluno();
+        doReturn("Doe").when(alunoServiceSpy).solicitarNovoSobrenomeAluno();
+        doReturn(27).when(alunoServiceSpy).solicitarNovaIdadeAluno();
         //ação
         alunoServiceSpy.atualizarAluno(aluno);
         //verificação
@@ -79,9 +79,9 @@ public class AlunoServiceImplTest {
     public void deveVerificarSeAtualizouIdadeDoAluno() {
         //cenario
         Aluno aluno = new Aluno("Jose", "Alguém", 23);
-        doReturn("John").when(alunoServiceSpy).solicitarNomeAluno();
-        doReturn("Doe").when(alunoServiceSpy).solicitarSobrenomeAluno();
-        doReturn(27).when(alunoServiceSpy).solicitarIdadeAluno();
+        doReturn("John").when(alunoServiceSpy).solicitarNovoNomeAluno();
+        doReturn("Doe").when(alunoServiceSpy).solicitarNovoSobrenomeAluno();
+        doReturn(27).when(alunoServiceSpy).solicitarNovaIdadeAluno();
         //ação
         alunoServiceSpy.atualizarAluno(aluno);
         //verificação
@@ -121,6 +121,41 @@ public class AlunoServiceImplTest {
         alunoService.solicitarNomeAluno();
         //verificação
         MatcherAssert.assertThat(alunoServiceSpy.solicitarNomeAluno(), is("John"));
+
+    }
+    @Test
+    public void deveRetornarNovaIdadeDoAluno() {
+        //cenario
+        doReturn(27).when(alunoServiceSpy).solicitarNovaIdadeAluno();
+        //ação
+        alunoService.solicitarNovaIdadeAluno();
+        //verificação
+        MatcherAssert.assertThat(alunoServiceSpy.solicitarNovaIdadeAluno(), is(27));
+
+    }
+
+    //verificar solicitação de sobrenome
+    @Test
+    public void deveRetornarNovoSobreNomeDoAlunoQuandoCriado() {
+        //cenario
+        doReturn("Doe").when(alunoServiceSpy).solicitarNovoSobrenomeAluno();
+
+        //ação
+        alunoService.solicitarNovoSobrenomeAluno();
+        //verificação
+        MatcherAssert.assertThat(alunoServiceSpy.solicitarNovoSobrenomeAluno(), is("Doe"));
+
+    }
+
+    //verificar solicitação de nome
+    @Test
+    public void deveRetornarNovoNomeDoAlunoQuandoCriado() {
+        //cenario
+        doReturn("John").when(alunoServiceSpy).solicitarNovoNomeAluno();
+        //ação
+        alunoService.solicitarNovoNomeAluno();
+        //verificação
+        MatcherAssert.assertThat(alunoServiceSpy.solicitarNovoNomeAluno(), is("John"));
 
     }
 }

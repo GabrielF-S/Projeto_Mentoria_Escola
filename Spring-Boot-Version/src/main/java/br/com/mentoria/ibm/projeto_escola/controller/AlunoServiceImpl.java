@@ -33,6 +33,23 @@ public class AlunoServiceImpl implements AlunoService {
         System.out.println("Digite o nome do Aluno: ");
         return scanner.retornarString();
     }
+    @Override
+    public int solicitarNovaIdadeAluno() {
+        System.out.println("Informe a nova idade do aluno: ");
+        int idade = scanner.retornarInt();
+        return idade;
+    }
+
+    @Override
+    public String solicitarNovoSobrenomeAluno() {
+        System.out.println("Informe o novo sobrenome do aluno: ");
+        return scanner.retornarString();
+    }
+    @Override
+    public String solicitarNovoNomeAluno() {
+        System.out.println("Digite o novo nome do Aluno: ");
+        return scanner.retornarString();
+    }
 
     @Override
     public String IDgeneretor(String primeiroNomeAluno, String sobrenomeAluno, int idade) {
@@ -45,13 +62,13 @@ public class AlunoServiceImpl implements AlunoService {
     public Aluno atualizarAluno(Aluno aluno) {
         System.out.println("Aluno: " + aluno.getPrimeiroNomeAluno() + " " + aluno.getSobrenomeAluno() + " Idade: " + aluno.getIdade());
         System.out.println("Nome Antigo: " + aluno.getPrimeiroNomeAluno());
-        String novoNome = solicitarNomeAluno();
+        String novoNome = solicitarNovoNomeAluno();
         aluno.setPrimeiroNomeAluno(novoNome);
         System.out.println("Sobrenome Antigo: " + aluno.getSobrenomeAluno() );
-        String novoSobrenome = solicitarSobrenomeAluno();
+        String novoSobrenome = solicitarNovoSobrenomeAluno();
         aluno.setSobrenomeAluno(novoSobrenome);
         System.out.println("Idade Antiga: " + aluno.getIdade());
-        int novoIdade = solicitarIdadeAluno();
+        int novoIdade = solicitarNovaIdadeAluno();
         aluno.setIdade(novoIdade);
         System.out.println("Atualizado para: " + aluno.getPrimeiroNomeAluno() + " " + aluno.getSobrenomeAluno() + " Idade: " + aluno.getIdade());
         return aluno;

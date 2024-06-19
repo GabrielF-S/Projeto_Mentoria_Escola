@@ -115,7 +115,7 @@ public class EscolaServiceImpl implements EscolaService {
         String nomeTurma = turmaService.solicitarNomeTurma();
         Turma turma = this.localizarUmaTurma(nomeTurma);
         if (escola.getTurmas().contains(turma)) {
-            turma.setNomeTurma(turmaService.solicitarNovoNomeTurma());
+            turmaService.atualizarNomeTurma(turma);
             System.out.println("Nome da turma alterado para: " + turma.getNomeTurma());
         }
     }

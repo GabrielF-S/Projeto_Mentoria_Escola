@@ -1,10 +1,10 @@
 package br.com.mentoria.ibm.projeto_escola.model;
 
-import br.com.mentoria.ibm.projeto_escola.view.Controlador;
+import br.com.mentoria.ibm.projeto_escola.view.Menus;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Controlador controller = new Controlador();
+        Menus controller = new Menus();
         controller.init();
     }
 }

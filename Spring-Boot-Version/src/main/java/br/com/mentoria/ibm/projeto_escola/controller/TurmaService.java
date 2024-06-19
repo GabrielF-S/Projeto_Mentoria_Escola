@@ -22,4 +22,6 @@ public interface TurmaService {
     Turma criarTurma();
 
     String solicitarNovoNomeTurma();
+
+    void atualizarNomeTurma(Turma turma);
 }

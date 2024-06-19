@@ -100,4 +100,9 @@ public class TurmaServiceImpl implements TurmaService {
         System.out.println("Informe o novo nome da turma");
         return scanner.retornarString();
     }
+
+    @Override
+    public void atualizarNomeTurma(Turma turma) {
+        turma.setNomeTurma(this.solicitarNovoNomeTurma());
+    }
 }
