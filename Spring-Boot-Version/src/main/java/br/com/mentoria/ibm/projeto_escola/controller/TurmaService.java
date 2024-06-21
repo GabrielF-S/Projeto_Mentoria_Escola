@@ -9,7 +9,9 @@ public interface TurmaService {
 
     void adicionarAluno(Aluno aluno) throws Exception;
 
-    Aluno localizarAlunoID(String id) throws Exception;
+    Aluno localizarAlunoNome(String nome) throws Exception;
+
+    Aluno localizarAlunoID(Integer id) throws Exception;
 
 //    void removerAluno(Aluno aluno, Turma turma);
 

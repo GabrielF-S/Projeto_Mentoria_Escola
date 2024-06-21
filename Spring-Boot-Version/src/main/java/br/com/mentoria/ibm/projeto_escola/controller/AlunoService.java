@@ -8,8 +8,6 @@ public interface AlunoService {
 
     String solicitarNovoNomeAluno();
 
-    String IDgeneretor(String primeiroNomeAluno, String sobrenomeAluno, int idade);
-
     Aluno atualizarAluno(Aluno aluno);
 
      int solicitarIdadeAluno();

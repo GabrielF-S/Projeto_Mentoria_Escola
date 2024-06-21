@@ -1,17 +1,24 @@
 package br.com.mentoria.ibm.projeto_escola.model;
 
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
-
+@Entity
+@Table(name = "tb_turma")
 public class Turma {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
     final int TAMANHO_MAX= 3;
+    @Column(name = "nome")
     private String nomeTurma;
 
-
+    @OneToMany(mappedBy = "tb_turma", fetch = FetchType.LAZY)
     List<Aluno> alunos = new ArrayList<>();
 
     public Turma(String nomeTurma) {
-        this.nomeTurma = nomeTurma;
+        setNomeTurma(nomeTurma);
     }
 
     public String getNomeTurma() {

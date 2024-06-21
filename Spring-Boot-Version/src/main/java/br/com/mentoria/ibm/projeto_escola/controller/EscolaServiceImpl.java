@@ -77,7 +77,7 @@ public class EscolaServiceImpl implements EscolaService {
     public Aluno localizarAluno() throws Exception {
         if (!escola.getTurmas().isEmpty()) {
             String alunoId = alunoService.solicitarNomeAluno();
-            Aluno aluno = turmaService.localizarAlunoID(alunoId);
+            Aluno aluno = turmaService.localizarAlunoNome(alunoId);
             if (aluno != null) {
                 System.out.println(aluno);
                 return aluno;

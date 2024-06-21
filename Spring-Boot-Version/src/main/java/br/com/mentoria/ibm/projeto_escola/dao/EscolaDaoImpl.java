@@ -6,7 +6,7 @@ import br.com.mentoria.ibm.projeto_escola.model.Turma;
 
 import java.util.List;
 
-public class EscolaDaoImpl implements EscolaDao{
+public class EscolaDaoImpl extends AbstractDao<Escola, Long> implements EscolaDao{
     @Override
     public void save(Escola escola) {
 

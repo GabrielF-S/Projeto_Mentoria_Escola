@@ -1,24 +1,36 @@
 package br.com.mentoria.ibm.projeto_escola.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "tb_aluno")
 public class Aluno {
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "nomealuno")
     private String primeiroNomeAluno;
+    @Column(name = "sobrenomealuno")
     private String sobrenomeAluno;
     private int idade;
 
-    public Aluno(String primeiroNomeAluno, String sobrenomeAluno, int idade) {
-        this.primeiroNomeAluno = primeiroNomeAluno;
-        this.sobrenomeAluno = sobrenomeAluno;
-        this.idade = idade;
+    public Aluno() {
+
     }
-    public Aluno(String primeiroNomeAluno, String sobrenomeAluno, int idade, String id) {
-        this.primeiroNomeAluno = primeiroNomeAluno;
-        this.sobrenomeAluno = sobrenomeAluno;
-        this.idade = idade;
+
+    public Aluno(String primeiroNomeAluno, String sobrenomeAluno, int idade) {
+        setPrimeiroNomeAluno(primeiroNomeAluno);
+        setSobrenomeAluno(sobrenomeAluno);
+        setIdade(idade);
+
+    }
+    public Aluno(String primeiroNomeAluno, String sobrenomeAluno, int idade, int id) {
+        setPrimeiroNomeAluno(primeiroNomeAluno);
+        setSobrenomeAluno(sobrenomeAluno);
+        setIdade(idade);
+
         this.id = id;
     }
-
-
 
     public String getPrimeiroNomeAluno() {
         return primeiroNomeAluno;
@@ -44,7 +56,7 @@ public class Aluno {
         this.idade = idade;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 

@@ -13,7 +13,7 @@ public class Escola {
 
 
     public Escola(String nomeEscola) {
-        this.nomeEscola = nomeEscola;
+        setNomeEscola(nomeEscola);
     }
 
 

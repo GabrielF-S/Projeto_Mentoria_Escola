@@ -15,7 +15,7 @@ public interface AlunoDao {
 
     List<Aluno> localizarPorNome(String nome);
 
-    Aluno localizarPorID(String id);
+    Aluno localizarPorID(Long id);
 
 
 }

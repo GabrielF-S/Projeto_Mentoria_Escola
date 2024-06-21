@@ -100,13 +100,11 @@ public class TurmaServiceImplTest {
         when(alunoService.solicitarNomeAluno()).thenReturn("Phil");
         when(alunoService.solicitarSobrenomeAluno()).thenReturn("Doe");
         when(alunoService.solicitarIdadeAluno()).thenReturn(27);
-        when(alunoService.IDgeneretor("Phil", "Doe",
-                27)).thenCallRealMethod();
         when(alunoService.criarAluno()).thenCallRealMethod();
         Aluno alunoTeste = alunoService.criarAluno();
         turmaServiceSpy.adicionarAluno(alunoTeste);
         //ação
-        Aluno alunoTest2 = turmaServiceSpy.localizarAlunoID("Phil");
+        Aluno alunoTest2 = turmaServiceSpy.localizarAlunoNome("Phil");
         //verificação
         Assert.assertSame(alunoTeste, alunoTest2);
     }
@@ -114,15 +112,15 @@ public class TurmaServiceImplTest {
     @Test
     public void deveRetornarAlunoQuandoPassadoONomeQuandoTemVariosAlunos() throws Exception {
         //cenario
-        Aluno alunoTest1 = new Aluno("John1", "Doe1", 27, "teste1");
-        Aluno alunoTest2 = new Aluno("John2", "Doe2", 27, "teste2");
-        Aluno alunoTest3 = new Aluno("John3", "Doe3", 27, "teste3");
+        Aluno alunoTest1 = new Aluno("John1", "Doe1", 27);
+        Aluno alunoTest2 = new Aluno("John2", "Doe2", 27);
+        Aluno alunoTest3 = new Aluno("John3", "Doe3", 27);
 
         turmaServiceSpy.adicionarAluno(alunoTest1);
         turmaServiceSpy.adicionarAluno(alunoTest2);
         turmaServiceSpy.adicionarAluno(alunoTest3);
         //ação
-        Aluno alunoTest = turmaServiceSpy.localizarAlunoID("John3");
+        Aluno alunoTest = turmaServiceSpy.localizarAlunoNome("John3");
         //verificação
         Assert.assertSame(alunoTest3, alunoTest);
     }
@@ -130,30 +128,30 @@ public class TurmaServiceImplTest {
     @Test
     public void deveRetornarAlunoQuandoPassadoOIDQuandoTemVariosAlunos() throws Exception {
         //cenario
-        Aluno alunoTest1 = new Aluno("John1", "Doe1", 27, "teste1");
-        Aluno alunoTest2 = new Aluno("John2", "Doe2", 27, "teste2");
-        Aluno alunoTest3 = new Aluno("John3", "Doe3", 27, "teste3");
-        String idAluno = alunoTest3.getId();
+        Aluno alunoTest1 = new Aluno("John1", "Doe1", 27,  12345);
+        Aluno alunoTest2 = new Aluno("John2", "Doe2", 27, 12346);
+        Aluno alunoTest3 = new Aluno("John3", "Doe3", 27, 12347);
+        Integer idAluno = alunoTest3.getId();
         turmaServiceSpy.adicionarAluno(alunoTest1);
         turmaServiceSpy.adicionarAluno(alunoTest2);
         turmaServiceSpy.adicionarAluno(alunoTest3);
         //ação
-        Aluno alunoTest = turmaServiceSpy.localizarAlunoID(idAluno);
+        Aluno alunoTest = turmaServiceSpy.localizarAlunoNome(alunoTest3.getPrimeiroNomeAluno());
         //verificação
         Assert.assertSame(alunoTest3, alunoTest);
     }
     @Test
     public void deveRetornarFalsoQuandoAlunoPesqusadoForDiferente() throws Exception {
         //cenario
-        Aluno alunoTest1 = new Aluno("John1", "Doe1", 27, "teste1");
-        Aluno alunoTest2 = new Aluno("John2", "Doe2", 27, "teste2");
-        Aluno alunoTest3 = new Aluno("John3", "Doe3", 27, "teste3");
+        Aluno alunoTest1 = new Aluno("John1", "Doe1", 27, 12345);
+        Aluno alunoTest2 = new Aluno("John2", "Doe2", 27, 12346);
+        Aluno alunoTest3 = new Aluno("John3", "Doe3", 27, 12347);
 
         turmaServiceSpy.adicionarAluno(alunoTest1);
         turmaServiceSpy.adicionarAluno(alunoTest2);
         turmaServiceSpy.adicionarAluno(alunoTest3);
         //ação
-        Aluno alunoTest = turmaServiceSpy.localizarAlunoID("John3");
+        Aluno alunoTest = turmaServiceSpy.localizarAlunoNome("John3");
         //verificação
         Assert.assertNotSame(alunoTest2, alunoTest);
     }
@@ -162,18 +160,18 @@ public class TurmaServiceImplTest {
     public void deveLancarExceptionQuandoAlunoAluno() throws Exception {
         //cenario
         Aluno alunoTest1 = new Aluno("John1", "Doe1",
-                27, "teste1");
+                27);
         Aluno alunoTest2 = new Aluno("John2", "Doe2",
-                27, "teste2");
+                27);
         Aluno alunoTest3 = new Aluno("John3", "Doe3",
-                27, "teste3");
+                27);
 
         turmaServiceSpy.adicionarAluno(alunoTest1);
         turmaServiceSpy.adicionarAluno(alunoTest2);
         turmaServiceSpy.adicionarAluno(alunoTest3);
         try {
             //ação
-            turmaServiceSpy.localizarAlunoID("John4");
+            turmaServiceSpy.localizarAlunoNome("John4");
             Assert.fail();
         } catch (Exception e) {
             //verificação
@@ -211,11 +209,11 @@ public class TurmaServiceImplTest {
     public void deveRetornarTruQuandoTurmaContem3Alunos() throws Exception {
         //cenario
         Aluno alunoTest1 = new Aluno("John1", "Doe1",
-                27, "teste1");
+                27);
         Aluno alunoTest2 = new Aluno("John2", "Doe2",
-                27, "teste2");
+                27);
         Aluno alunoTest3 = new Aluno("John3", "Doe3",
-                27, "teste3");
+                27);
 
         turmaServiceSpy.adicionarAluno(alunoTest1);
         turmaServiceSpy.adicionarAluno(alunoTest2);

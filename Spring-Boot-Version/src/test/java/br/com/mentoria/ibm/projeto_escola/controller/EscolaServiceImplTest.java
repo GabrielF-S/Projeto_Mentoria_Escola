@@ -83,7 +83,7 @@ public class EscolaServiceImplTest {
         escolaServiceSpy.cadastrarTurma();
         //Aluno
         when(escolaServiceSpy.criarAluno()).thenReturn(new Aluno("Tom",
-                "Hanks", 23, "12345"));
+                "Hanks", 23));
         doCallRealMethod().when(escolaServiceSpy).criarAluno();
         Aluno aluno = escolaServiceSpy.criarAluno();
         //ação
@@ -101,7 +101,7 @@ public class EscolaServiceImplTest {
         escola = escolaServiceSpy.criarEscola();
         //escola
         when(escolaServiceSpy.criarAluno()).thenReturn(new Aluno("Tom",
-                "Hanks", 23, "12345"));
+                "Hanks", 23));
         //ação
         try {
             escolaServiceSpy.cadastrarAluno();
@@ -126,12 +126,12 @@ public class EscolaServiceImplTest {
         escolaServiceSpy.cadastrarTurma();
         //escola
         when(escolaServiceSpy.criarAluno()).thenReturn(new Aluno("Tom",
-                "Hanks", 23, "12345"));
+                "Hanks", 23));
         doCallRealMethod().when(escolaServiceSpy).criarAluno();
         Aluno aluno = escolaServiceSpy.criarAluno();
         escolaServiceSpy.cadastrarAluno();
         when(alunoService.solicitarNomeAluno()).thenReturn("Tom");
-        when(turmaService.localizarAlunoID("Tom")).thenReturn(aluno);
+        when(turmaService.localizarAlunoNome("Tom")).thenReturn(aluno);
         doCallRealMethod().when(escolaServiceSpy).localizarAluno();
         when(alunoService.solicitarNovoNomeAluno()).thenReturn("John");
         when(alunoService.solicitarNovoSobrenomeAluno()).thenReturn("Doe");
@@ -156,12 +156,12 @@ public class EscolaServiceImplTest {
         escolaServiceSpy.cadastrarTurma();
         //escola
         when(escolaServiceSpy.criarAluno()).thenReturn(new Aluno("Tom",
-                "Hanks", 23, "12345"));
+                "Hanks", 23));
         doCallRealMethod().when(escolaServiceSpy).criarAluno();
         Aluno aluno = escolaServiceSpy.criarAluno();
         escolaServiceSpy.cadastrarAluno();
         when(alunoService.solicitarNomeAluno()).thenReturn("Tom");
-        when(turmaService.localizarAlunoID("Tom")).thenReturn(aluno);
+        when(turmaService.localizarAlunoNome("Tom")).thenReturn(aluno);
         doCallRealMethod().when(escolaServiceSpy).localizarAluno();
         when(alunoService.solicitarNovoNomeAluno()).thenReturn("John");
         when(alunoService.solicitarNovoSobrenomeAluno()).thenReturn("Doe");
@@ -186,12 +186,12 @@ public class EscolaServiceImplTest {
         escolaServiceSpy.cadastrarTurma();
         //escola
         when(escolaServiceSpy.criarAluno()).thenReturn(new Aluno("Tom",
-                "Hanks", 23, "12345"));
+                "Hanks", 23));
         doCallRealMethod().when(escolaServiceSpy).criarAluno();
         Aluno aluno = escolaServiceSpy.criarAluno();
         escolaServiceSpy.cadastrarAluno();
         when(alunoService.solicitarNomeAluno()).thenReturn("Tom");
-        when(turmaService.localizarAlunoID("Tom")).thenReturn(aluno);
+        when(turmaService.localizarAlunoNome("Tom")).thenReturn(aluno);
         doCallRealMethod().when(escolaServiceSpy).localizarAluno();
         when(alunoService.solicitarNovoNomeAluno()).thenReturn("John");
         when(alunoService.solicitarNovoSobrenomeAluno()).thenReturn("Doe");
@@ -213,13 +213,13 @@ public class EscolaServiceImplTest {
         doCallRealMethod().when(escolaServiceSpy).criarTurma();
         escolaServiceSpy.cadastrarTurma();
         Aluno aluno1 = new Aluno("John",
-                "Hanks", 23, "12346");
+                "Hanks", 23);
         Aluno aluno2 = new Aluno("Tom",
-                "Hanks", 23, "12345");
+                "Hanks", 23);
         Aluno aluno3 = new Aluno("Bom",
-                "Hanks", 23, "12347");
+                "Hanks", 23);
         Aluno aluno4 = new Aluno("Kon",
-                "Hanks", 23, "12349");
+                "Hanks", 23);
         List<Aluno> alunosList = new ArrayList<>();
         alunosList.add(aluno1);
         alunosList.add(aluno2);
@@ -264,13 +264,13 @@ public class EscolaServiceImplTest {
         doCallRealMethod().when(escolaServiceSpy).criarTurma();
         escolaServiceSpy.cadastrarTurma();
         Aluno aluno1 = new Aluno("John",
-                "Hanks", 23, "12346");
+                "Hanks", 23);
         Aluno aluno2 = new Aluno("Tom",
-                "Hanks", 23, "12345");
+                "Hanks", 23);
         Aluno aluno3 = new Aluno("Bom",
-                "Hanks", 23, "12347");
+                "Hanks", 23);
         Aluno aluno4 = new Aluno("Kon",
-                "Hanks", 23, "12349");
+                "Hanks", 23);
         List<Aluno> alunosList = new ArrayList<>();
         alunosList.add(aluno1);
         alunosList.add(aluno2);
@@ -438,7 +438,7 @@ public class EscolaServiceImplTest {
         listaDeTurmas.add(turma3);
         escolaServiceSpy.cadastrarTurma();
         escola.setTurmas(listaDeTurmas);
-        Aluno aluno1 = new Aluno("Tom","Hanks", 23, "12346");
+        Aluno aluno1 = new Aluno("Tom","Hanks", 23, 12346);
         turma2.setAlunos(aluno1);
         //ação
         escolaServiceSpy.localizarTodasTurmas();
@@ -510,7 +510,7 @@ public class EscolaServiceImplTest {
         escola = escolaServiceSpy.criarEscola();
         //turma
         Turma turma1 = new Turma("Turma A");
-        Aluno aluno = new Aluno("John","Hanks", 23, "12346");
+        Aluno aluno = new Aluno("John","Hanks", 23, 12346);
         List<Turma> listaDeTurmas = new ArrayList<>();
         listaDeTurmas.add(turma1);
 
@@ -540,7 +540,7 @@ public class EscolaServiceImplTest {
         escolaServiceSpy.cadastrarTurma();
         //Aluno
         when(escolaServiceSpy.criarAluno()).thenReturn(new Aluno("Tom",
-                "Hanks", 23, "12345"));
+                "Hanks", 23, 12345));
         doCallRealMethod().when(escolaServiceSpy).criarAluno();
         Aluno aluno = escolaServiceSpy.criarAluno();
         escolaServiceSpy.cadastrarAluno();
@@ -559,7 +559,7 @@ public class EscolaServiceImplTest {
         escola = escolaServiceSpy.criarEscola();
         //Aluno
         when(escolaServiceSpy.criarAluno()).thenReturn(new Aluno("Tom",
-                "Hanks", 23, "12345"));
+                "Hanks", 23, 12345));
         doCallRealMethod().when(escolaServiceSpy).criarAluno();
         Aluno aluno = escolaServiceSpy.criarAluno();
         //ação

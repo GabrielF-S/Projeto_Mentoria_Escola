@@ -11,8 +11,7 @@ public class AlunoServiceImpl implements AlunoService {
         String primeiroNomeAluno = solicitarNomeAluno();
         String sobreNomeAluno = solicitarSobrenomeAluno();
         int idadeAluno = solicitarIdadeAluno();
-        String idAluno = IDgeneretor(primeiroNomeAluno, sobreNomeAluno, idadeAluno);
-        return new Aluno(primeiroNomeAluno, sobreNomeAluno, idadeAluno, idAluno);
+        return new Aluno(primeiroNomeAluno, sobreNomeAluno, idadeAluno);
 
     }
 
@@ -51,12 +50,7 @@ public class AlunoServiceImpl implements AlunoService {
         return scanner.retornarString();
     }
 
-    @Override
-    public String IDgeneretor(String primeiroNomeAluno, String sobrenomeAluno, int idade) {
-        int num = (int) (Math.random() * 1001);
-        String salt = String.valueOf(num);
-        return primeiroNomeAluno.length() + String.valueOf(sobrenomeAluno.length()) + idade + salt;
-    }
+
 
     @Override
     public Aluno atualizarAluno(Aluno aluno) {
