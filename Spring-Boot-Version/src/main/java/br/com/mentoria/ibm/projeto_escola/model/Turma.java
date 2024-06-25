@@ -4,18 +4,20 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Entity
 @Table(name = "tb_turma")
 public class Turma {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    final int TAMANHO_MAX= 3;
+    @Transient
+    final int TAMANHO_MAX = 3;
     @Column(name = "nome")
     private String nomeTurma;
 
-    @OneToMany(mappedBy = "tb_turma", fetch = FetchType.LAZY)
-    List<Aluno> alunos = new ArrayList<>();
+    @OneToMany
+    List<Aluno> alunos;
 
     public Turma(String nomeTurma) {
         setNomeTurma(nomeTurma);
@@ -42,17 +44,14 @@ public class Turma {
     }
 
 
-
     @Override
     public String toString() {
-        return "Turma: " + nomeTurma +"\nAlunos: \n";
+        return "Turma: " + nomeTurma + "\nAlunos: \n";
     }
 
 
-
-
     public void removerAluno(Aluno aluno) throws Exception {
-        if (!alunos.contains(aluno)){
+        if (!alunos.contains(aluno)) {
             throw new Exception("Aluno não localizado");
         }
         alunos.remove(aluno);

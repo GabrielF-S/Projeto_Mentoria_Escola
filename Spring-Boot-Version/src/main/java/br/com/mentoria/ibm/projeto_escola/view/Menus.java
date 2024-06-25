@@ -1,10 +1,9 @@
 package br.com.mentoria.ibm.projeto_escola.view;
 
-import br.com.mentoria.ibm.projeto_escola.controller.EscolaService;
-import br.com.mentoria.ibm.projeto_escola.controller.EscolaServiceImpl;
+import br.com.mentoria.ibm.projeto_escola.service.EscolaService;
+import br.com.mentoria.ibm.projeto_escola.service.EscolaServiceImpl;
 import br.com.mentoria.ibm.projeto_escola.model.Escola;
 
-import java.util.Scanner;
 public class Menus {
     Escola escola;
     Inputs inputs = new Inputs();
@@ -12,8 +11,8 @@ public class Menus {
     EscolaService escolaService = new EscolaServiceImpl();
 
     public void init() throws Exception {
-
-        escola = escolaService.criarEscola();
+        String nomeEscola = inputs.retornarString();
+        escola = escolaService.criarEscola(nomeEscola);
         menu();
     }
     public void menu() throws Exception {

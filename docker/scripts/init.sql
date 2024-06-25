@@ -19,10 +19,10 @@ CREATE table tb_turma(
 );
 
 CREATE table tb_escola(
-    id_escola integer  not null,
+    id_escola serial integer  not null,
     nome varchar(50),
-    id_turma integer not null,
-    id_aluno integer not null,
+    id_turma integer,
+    id_aluno integer,
 
     PRIMARY KEY(id_escola),
     FOREIGN KEY (id_turma) REFERENCES tb_turma (id_turma),

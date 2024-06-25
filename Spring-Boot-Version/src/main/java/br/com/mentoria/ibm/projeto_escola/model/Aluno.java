@@ -7,16 +7,17 @@ import jakarta.persistence.*;
 public class Aluno {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_aluno")
     private Integer id;
     @Column(name = "nomealuno")
     private String primeiroNomeAluno;
     @Column(name = "sobrenomealuno")
     private String sobrenomeAluno;
+    @Column
     private int idade;
 
-    public Aluno() {
 
-    }
+
 
     public Aluno(String primeiroNomeAluno, String sobrenomeAluno, int idade) {
         setPrimeiroNomeAluno(primeiroNomeAluno);

@@ -1,8 +1,8 @@
 package br.com.mentoria.ibm.projeto_escola.view;
 
-import br.com.mentoria.ibm.projeto_escola.controller.AlunoServiceImpl;
-import br.com.mentoria.ibm.projeto_escola.controller.EscolaServiceImpl;
-import br.com.mentoria.ibm.projeto_escola.controller.TurmaServiceImpl;
+import br.com.mentoria.ibm.projeto_escola.service.AlunoServiceImpl;
+import br.com.mentoria.ibm.projeto_escola.service.EscolaServiceImpl;
+import br.com.mentoria.ibm.projeto_escola.service.TurmaServiceImpl;
 import br.com.mentoria.ibm.projeto_escola.model.Escola;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +46,7 @@ public class MenusTest {
         //cenario
          doCallRealMethod().when(menusSpy).init();
          when(escolaService.solicitarNomeEscola()).thenReturn("Escola Teste");
-         when(escolaService.criarEscola()).thenReturn(new Escola("Escola Teste"));
+         when(escolaService.criarEscola("IBM")).thenReturn(new Escola("IBM"));
          doReturn(0).when(menusSpy).selecionarOpcaoMenu();
         //ação
         menusSpy.init();
@@ -59,7 +59,7 @@ public class MenusTest {
         //cenario
         doCallRealMethod().when(menusSpy).init();
         when(escolaService.solicitarNomeEscola()).thenReturn("Escola Teste");
-        when(escolaService.criarEscola()).thenReturn(new Escola("Escola Teste"));
+        when(escolaService.criarEscola("IBM")).thenReturn(new Escola("Escola Teste"));
         doReturn(0).when(menusSpy).selecionarOpcaoMenu();
         //ação
         menusSpy.init();
