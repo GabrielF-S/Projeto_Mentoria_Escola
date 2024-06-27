@@ -1,5 +1,7 @@
 package br.com.mentoria.ibm.projeto_escola.view;
 
+import br.com.mentoria.ibm.projeto_escola.model.Aluno;
+import br.com.mentoria.ibm.projeto_escola.model.Turma;
 import br.com.mentoria.ibm.projeto_escola.service.EscolaService;
 import br.com.mentoria.ibm.projeto_escola.service.EscolaServiceImpl;
 import br.com.mentoria.ibm.projeto_escola.model.Escola;
@@ -48,8 +50,8 @@ public class Menus {
             System.out.println("Você deseja cadastrar: \n1- Turma\n2- Aluno\n3 - Menu Anterior");
             int opcao = selecionarOpcaoCadastro();
             switch (opcao) {
-                case 1 -> escolaService.cadastrarTurma();
-                case 2 -> escolaService.cadastrarAluno();
+                case 1 -> escolaService.cadastrarTurma(1, new Turma());
+                case 2 -> escolaService.cadastrarAluno(new Aluno());
                 case 3 -> {
 
                     controleMenu = false;

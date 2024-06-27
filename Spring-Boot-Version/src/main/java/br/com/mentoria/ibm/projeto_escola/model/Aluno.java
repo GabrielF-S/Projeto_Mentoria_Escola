@@ -17,7 +17,8 @@ public class Aluno {
     private int idade;
 
 
-
+    public Aluno() {
+    }
 
     public Aluno(String primeiroNomeAluno, String sobrenomeAluno, int idade) {
         setPrimeiroNomeAluno(primeiroNomeAluno);

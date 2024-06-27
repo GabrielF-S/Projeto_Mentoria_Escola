@@ -3,6 +3,8 @@ package br.com.mentoria.ibm.projeto_escola.service;
 import br.com.mentoria.ibm.projeto_escola.model.Aluno;
 import br.com.mentoria.ibm.projeto_escola.model.Turma;
 
+import java.util.List;
+
 public interface TurmaService {
 
 //    void adicionarAluno(Aluno aluno, Turma turma) throws Exception;
@@ -21,9 +23,15 @@ public interface TurmaService {
 
     boolean isCheia(Turma turma);
 
-    Turma criarTurma();
+    Turma criarTurma(String nome);
 
     String solicitarNovoNomeTurma();
 
-    void atualizarNomeTurma(Turma turma);
+    Turma atualizarNomeTurma(Turma turma);
+
+    Turma localizarTurmaPorId(int id);
+
+    void deletarTurma(int id);
+
+    List<Turma> localizarTodasTurmas();
 }

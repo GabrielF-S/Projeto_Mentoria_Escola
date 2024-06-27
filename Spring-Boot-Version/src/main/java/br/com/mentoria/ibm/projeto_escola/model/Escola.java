@@ -13,10 +13,10 @@ import java.util.List;
 @Table(name = "tb_escola")
 public class Escola implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_escola", nullable = false, unique = true)
     private int id;
-    @Column(name = "nome")
+    @Column(name = "nome_escola")
     private String nomeEscola;
     @Transient
     private final int TAMANHO_MAX = 3;
@@ -48,8 +48,8 @@ public class Escola implements Serializable {
         return turmas;
     }
 
-    public void setTurmas(List<Turma> turmas) {
-        this.turmas = turmas;
+    public void setTurmas(Turma turma) {
+        this.turmas.add(turma);
     }
 
     public List<Aluno> getAlunos() {

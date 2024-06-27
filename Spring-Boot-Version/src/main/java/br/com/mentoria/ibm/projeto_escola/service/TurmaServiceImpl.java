@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
 public class TurmaServiceImpl implements TurmaService {
-    private List<Turma> turmas = new ArrayList<>();
+
+    private List<Turma> turmas= new ArrayList<>();
     Inputs scanner = new Inputs();
     @Autowired
     TurmaRepository turmaRepo;
@@ -29,7 +31,7 @@ public class TurmaServiceImpl implements TurmaService {
 //            verificar.setAlunos(aluno);
 //        }
 
-//    }
+    //    }
     @Override
     public void adicionarAluno(Aluno aluno) throws Exception {
         boolean adicionado = false;
@@ -82,44 +84,72 @@ public class TurmaServiceImpl implements TurmaService {
 //
 //    }
 
-        @Override
-        public void removerAluno (Aluno aluno) throws Exception {
-            for (Turma turma : turmas) {
-                for (Aluno alunoList : turma.getAlunos()) {
-                    if (alunoList.equals(aluno)) {
-                        turma.removerAluno(aluno);
-                        System.out.println("Aluno :" + aluno.getPrimeiroNomeAluno() + " Removido");
-                        break;
-                    }
+    @Override
+    public void removerAluno(Aluno aluno) throws Exception {
+        for (Turma turma : turmas) {
+            for (Aluno alunoList : turma.getAlunos()) {
+                if (alunoList.equals(aluno)) {
+                    turma.removerAluno(aluno);
+                    System.out.println("Aluno :" + aluno.getPrimeiroNomeAluno() + " Removido");
+                    break;
                 }
             }
         }
-
-        @Override public String solicitarNomeTurma () {
-            System.out.println("Informe o nome da turma");
-            return scanner.retornarString();
-        }
-
-        @Override public boolean isCheia (Turma verificar){
-            return verificar.getAlunos().size() == verificar.getTAMANHO_MAX();
-        }
-
-        @Override public Turma criarTurma () {
-            String nomeTurma = solicitarNomeTurma();
-            if (turmas.size() < 3) {
-                Turma turma = new Turma(nomeTurma);
-                turmas.add(turma);
-                return turma;
-            }
-            return null;
-        }
-
-        @Override public String solicitarNovoNomeTurma () {
-            System.out.println("Informe o novo nome da turma");
-            return scanner.retornarString();
-        }
-
-        @Override public void atualizarNomeTurma (Turma turma){
-            turma.setNomeTurma(this.solicitarNovoNomeTurma());
-        }
     }
+
+    @Override
+    public String solicitarNomeTurma() {
+        System.out.println("Informe o nome da turma");
+        return scanner.retornarString();
+    }
+
+    @Override
+    public boolean isCheia(Turma verificar) {
+        return verificar.getAlunos().size() == verificar.getTAMANHO_MAX();
+    }
+
+    @Override
+    public Turma criarTurma(String nomeTurma) {
+        turmas = turmaRepo.findAll();
+        if (turmas.size() < 3) {
+            Turma turma= new Turma(nomeTurma);
+
+            if (turmas.contains(turma)){
+                System.out.println("Turma "+ nomeTurma+ " ja cadastrada");
+                return null;
+            }
+            return turmaRepo.save(turma);
+        }
+        return null;
+    }
+
+    @Override
+    public String solicitarNovoNomeTurma() {
+        System.out.println("Informe o novo nome da turma");
+        return scanner.retornarString();
+    }
+
+    @Override
+    public Turma atualizarNomeTurma(Turma turma) {
+        return turmaRepo.save(turma);
+    }
+
+    @Override
+    public Turma localizarTurmaPorId(int id) {
+        return turmaRepo.findById(id).get();
+    }
+
+    @Override
+    public void deletarTurma(int id) {
+            turmaRepo.deleteById(id);
+    }
+
+    @Override
+    public List<Turma> localizarTodasTurmas() {
+        return  turmaRepo.findAll();
+    }
+
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmaRepo.findAll();
+    }
+}

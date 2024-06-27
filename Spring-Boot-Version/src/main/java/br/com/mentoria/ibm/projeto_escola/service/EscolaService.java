@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EscolaService {
-    Aluno criarAluno();
+    Aluno criarAluno(Aluno aluno);
 
-    void cadastrarAluno() throws Exception;
+    void cadastrarAluno(Aluno aluno) throws Exception;
 
     void editarAluno() throws Exception;
 
@@ -18,9 +18,9 @@ public interface EscolaService {
     List<Aluno> localizarTodosAlunos() throws Exception;
     Aluno localizarAluno() throws Exception;
 
-    Turma criarTurma();
+    Turma criarTurma(String nomeTurma);
 
-    void cadastrarTurma();
+    Escola cadastrarTurma(int id,Turma turma);
 
     void editarTurma();
 
@@ -36,7 +36,7 @@ public interface EscolaService {
 
 
     Escola criarEscola(String nome);
-    void excuirEscola(Optional<Escola> escola);
+    void excuirEscola(int id);
 
     String solicitarNomeEscola();
 
@@ -50,7 +50,7 @@ public interface EscolaService {
 
     Optional<Escola> localizarEscolaPorId(int id);
 
-    Escola atualizarEscola(Optional<Escola> escolaBusca);
+    Escola atualizarEscola(Escola escola);
 
     List<Escola> localizarEscola();
 }

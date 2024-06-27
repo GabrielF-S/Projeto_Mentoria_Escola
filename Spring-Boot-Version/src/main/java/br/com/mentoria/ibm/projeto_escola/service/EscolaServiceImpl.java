@@ -25,22 +25,22 @@ public class EscolaServiceImpl implements EscolaService {
 
 
     @Override
-    public Aluno criarAluno() {
-        return alunoService.criarAluno();
+    public Aluno criarAluno(Aluno aluno) {
+        return alunoService.criarAluno(aluno);
     }
 
     @Override
-    public void cadastrarAluno() throws Exception {
+    public void cadastrarAluno(Aluno aluno) throws Exception {
         if (escola.getTurmas().isEmpty()) {
             System.out.println("ERRO: Não é possivel cadastrar aluno sem ter turmas");
             throw new Exception("Não é possivel cadastrar aluno sem ter turmas");
         } else {
             for (Turma turma : escola.getTurmas()) {
                 if (!turmaService.isCheia(turma)) {
-                    Aluno alunoEscola = alunoService.criarAluno();
-                    turmaService.adicionarAluno(alunoEscola);
+
+                    turmaService.adicionarAluno(aluno);
                     List<Aluno> alunos = escola.getAlunos();
-                    alunos.add(alunoEscola);
+                    alunos.add(aluno);
                     escola.setAlunos(alunos);
                     break;
                 } else {
@@ -101,23 +101,27 @@ public class EscolaServiceImpl implements EscolaService {
     }
 
     @Override
-    public Turma criarTurma() {
-        return turmaService.criarTurma();
+    public Turma criarTurma(String nomeTurma) {
+        return turmaService.criarTurma(nomeTurma);
     }
 
     @Override
-    public void cadastrarTurma() {
+    public Escola cadastrarTurma(int id, Turma turma ) {
+        escola = escolaRepo.findById(id).get();
         if (escola.getTurmas().size() < escola.getTAMANHO_MAX()) {
-            Turma turmaEscola = criarTurma();
-            if (escola.getTurmas().contains(turmaEscola)) {
+            if (escola.getTurmas().contains(turma)) {
                 System.out.println("Turma já cadastrada");
+                return null;
             } else {
-                System.out.println("Turma criada");
-                List<Turma> turmas = escola.getTurmas();
-                turmas.add(turmaEscola);
-                escola.setTurmas(turmas);
+                System.out.println("Turma Cadastrada");
+                escola.setTurmas(turma);
+                return escolaRepo.save(escola);
+//                List<Turma> turmas = escola.getTurmas();
+//                turmas.add(turmaEscola);
+//                escola.setTurmas(turmas);
             }
         }
+        return null;
     }
 
     @Override
@@ -140,7 +144,7 @@ public class EscolaServiceImpl implements EscolaService {
             if (this.confirmacao()) {
                 System.out.println("Turma: " + turma.getNomeTurma() + " excluida");
                 turmas.remove(turma);
-                escola.setTurmas(turmas);
+                escola.setTurmas((Turma) turmas);
             }
 
         } else {
@@ -198,8 +202,8 @@ public class EscolaServiceImpl implements EscolaService {
     }
 
     @Override
-    public void excuirEscola(Optional<Escola> escola) {
-        escolaRepo.deleteById(escola.get().getId());
+    public void excuirEscola(int id) {
+        escolaRepo.deleteById(id);
 
     }
 
@@ -245,8 +249,7 @@ public class EscolaServiceImpl implements EscolaService {
     }
 
     @Override
-    public Escola atualizarEscola(Optional<Escola> escolaBusca) {
-        escola = escolaBusca.get();
+    public Escola atualizarEscola(Escola escola) {
         return escolaRepo.save(escola);
     }
 

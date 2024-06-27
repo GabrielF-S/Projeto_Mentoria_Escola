@@ -6,6 +6,7 @@ import br.com.mentoria.ibm.projeto_escola.view.Inputs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,12 +16,8 @@ public class AlunoServiceImpl implements AlunoService {
     private AlunoRepository alunoRepo;
 
     @Override
-    public Aluno criarAluno() {
-        String primeiroNomeAluno = solicitarNomeAluno();
-        String sobreNomeAluno = solicitarSobrenomeAluno();
-        int idadeAluno = solicitarIdadeAluno();
-        return alunoRepo.save(new Aluno(primeiroNomeAluno, sobreNomeAluno, idadeAluno));
-
+    public Aluno criarAluno(Aluno aluno) {
+                return alunoRepo.save(aluno);
     }
 
     @Override
@@ -40,6 +37,12 @@ public class AlunoServiceImpl implements AlunoService {
         System.out.println("Digite o nome do Aluno: ");
         return scanner.retornarString();
     }
+
+    @Override
+    public Aluno localizarAlunoPorId(int id) {
+        return alunoRepo.findById(id).get();
+    }
+
     @Override
     public int solicitarNovaIdadeAluno() {
         System.out.println("Informe a nova idade do aluno: ");
@@ -62,19 +65,16 @@ public class AlunoServiceImpl implements AlunoService {
 
     @Override
     public Aluno atualizarAluno(Aluno aluno) {
-        System.out.println("Aluno: " + aluno.getPrimeiroNomeAluno() + " " + aluno.getSobrenomeAluno() + " Idade: " + aluno.getIdade());
-        System.out.println("Nome Antigo: " + aluno.getPrimeiroNomeAluno());
-        String novoNome = solicitarNovoNomeAluno();
-        aluno.setPrimeiroNomeAluno(novoNome);
-        System.out.println("Sobrenome Antigo: " + aluno.getSobrenomeAluno() );
-        String novoSobrenome = solicitarNovoSobrenomeAluno();
-        aluno.setSobrenomeAluno(novoSobrenome);
-        System.out.println("Idade Antiga: " + aluno.getIdade());
-        int novoIdade = solicitarNovaIdadeAluno();
-        aluno.setIdade(novoIdade);
-        System.out.println("Atualizado para: " + aluno.getPrimeiroNomeAluno() + " " + aluno.getSobrenomeAluno() + " Idade: " + aluno.getIdade());
-
         return alunoRepo.save(aluno);
+    }
 
+    @Override
+    public List<Aluno> localizarTodosAlunos() {
+        return alunoRepo.findAll();
+    }
+
+    @Override
+    public void deletarAluno(int id) {
+         alunoRepo.deleteById(id);
     }
 }

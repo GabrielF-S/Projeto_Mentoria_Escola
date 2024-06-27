@@ -34,9 +34,7 @@ public class TurmaServiceImplTest {
         MockitoAnnotations.openMocks(this);
         turmaServiceSpy = Mockito.spy(turmaService);
         alunoService = Mockito.mock(AlunoServiceImpl.class);
-        setNomeTurma = "Turma Test";
-        turmaTest = turmaService.criarTurma();
-        turmaTest.setNomeTurma(setNomeTurma);
+        turmaTest = turmaService.criarTurma("Turma Teste");
         scanner = Mockito.mock(Inputs.class);
     }
 
@@ -229,10 +227,9 @@ public class TurmaServiceImplTest {
     @Test
     public void deveCriarTurma() {
         //cenario
-        doCallRealMethod().when(turmaServiceSpy).criarTurma();
-        when(turmaServiceSpy.solicitarNomeTurma()).thenReturn(setNomeTurma);
+        doCallRealMethod().when(turmaServiceSpy).criarTurma("Turma Teste");
         //ação
-        Turma turma = turmaServiceSpy.criarTurma();
+        Turma turma = turmaServiceSpy.criarTurma("Turma Teste");
         //verificação
         MatcherAssert.assertThat(turma.getNomeTurma(), CoreMatchers.is("Turma Test"));
     }
@@ -240,10 +237,9 @@ public class TurmaServiceImplTest {
     @Test
     public void deveVerificarSeSolicitadoNomeDaTurma() {
         //cenario
-        doCallRealMethod().when(turmaServiceSpy).criarTurma();
-        when(turmaServiceSpy.solicitarNomeTurma()).thenReturn(setNomeTurma);
+        doCallRealMethod().when(turmaServiceSpy).criarTurma("Turma Teste");
         //ação
-        turmaServiceSpy.criarTurma();
+        turmaServiceSpy.criarTurma("Turma Teste");
         //verificação
         verify(turmaServiceSpy, atLeastOnce()).solicitarNomeTurma();
 
@@ -252,24 +248,23 @@ public class TurmaServiceImplTest {
     @Test
     public void deveRetornarNullQuandoNaoForPossivelCriarTurma() {
         //cenario
-        doCallRealMethod().when(turmaServiceSpy).criarTurma();
-        when(turmaServiceSpy.solicitarNomeTurma()).thenReturn(setNomeTurma);
-        Turma turma1 = turmaServiceSpy.criarTurma();
-        Turma turma2 = turmaServiceSpy.criarTurma();
+        doCallRealMethod().when(turmaServiceSpy).criarTurma("Turma Teste 1");
+        Turma turma1 = turmaServiceSpy.criarTurma("Turma Teste 1");
+        Turma turma2 = turmaServiceSpy.criarTurma("Turma Teste 1");
         //acao
-        Turma turmaNull = turmaServiceSpy.criarTurma();
+        Turma turmaNull = turmaServiceSpy.criarTurma("Turma Teste 1");
         //verificacao
         Assert.assertNull(turmaNull);
     }
     @Test
     public void deveVerificarSeOutrasTUrmasNaoSaoNullQuandoForPossivelCriarTurma() {
         //cenario
-        doCallRealMethod().when(turmaServiceSpy).criarTurma();
+        doCallRealMethod().when(turmaServiceSpy).criarTurma("Turma Teste");
         when(turmaServiceSpy.solicitarNomeTurma()).thenReturn(setNomeTurma);
-        Turma turma1 = turmaServiceSpy.criarTurma();
-        Turma turma2 = turmaServiceSpy.criarTurma();
+        Turma turma1 = turmaServiceSpy.criarTurma("Turma Teste 1");
+        Turma turma2 = turmaServiceSpy.criarTurma("Turma Teste 2");
         //acao
-        Turma turma3 = turmaServiceSpy.criarTurma();
+        Turma turma3 = turmaServiceSpy.criarTurma("Turma Teste 3");
         //verificacao
         Assert.assertNull(turma3);
     }

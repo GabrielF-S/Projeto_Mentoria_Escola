@@ -2,9 +2,11 @@ package br.com.mentoria.ibm.projeto_escola.service;
 
 import br.com.mentoria.ibm.projeto_escola.model.Aluno;
 
+import java.util.List;
+
 public interface AlunoService {
 
-    Aluno criarAluno();
+    Aluno criarAluno(Aluno aluno);
 
     String solicitarNovoNomeAluno();
 
@@ -21,4 +23,9 @@ public interface AlunoService {
     String solicitarNomeAluno();
 
 
+    Aluno localizarAlunoPorId(int id);
+
+    List<Aluno> localizarTodosAlunos();
+
+    void deletarAluno(int id);
 }
