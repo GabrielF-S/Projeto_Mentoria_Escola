@@ -3,7 +3,6 @@ package br.com.mentoria.ibm.projeto_escola.service;
 import br.com.mentoria.ibm.projeto_escola.model.Aluno;
 import br.com.mentoria.ibm.projeto_escola.model.Escola;
 import br.com.mentoria.ibm.projeto_escola.model.Turma;
-import br.com.mentoria.ibm.projeto_escola.view.Inputs;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
@@ -45,12 +44,11 @@ public class EscolaServiceImplTest {
     @Test
     public void deveRetornarUmAlunoQuandoForCriado() {
         //cenario
-        when(alunoService.criarAluno()).thenCallRealMethod();
-        when(alunoService.solicitarNomeAluno()).thenReturn("Tom");
-        when(alunoService.solicitarSobrenomeAluno()).thenReturn("Hanks");
-        when(alunoService.solicitarIdadeAluno()).thenReturn(23);
+
+        when(alunoService.criarAluno(new Aluno())).thenReturn
+                (new Aluno("Tom","Hanks",23));
         //açãp
-        Aluno aluno = escolaServiceSpy.criarAluno();
+        Aluno aluno = alunoService.criarAluno(new Aluno());
         //verificação
         Assert.assertNotNull(aluno);
 
@@ -63,7 +61,7 @@ public class EscolaServiceImplTest {
         when(alunoService.solicitarSobrenomeAluno()).thenReturn("Hanks");
         when(alunoService.solicitarIdadeAluno()).thenReturn(23);
         //açãp
-        Aluno aluno = escolaServiceSpy.criarAluno();
+        Aluno aluno = alunoService.criarAluno(new Aluno());
         //verificação
         MatcherAssert.assertThat(aluno.getPrimeiroNomeAluno(), CoreMatchers.is("Tom"));
 
@@ -79,12 +77,12 @@ public class EscolaServiceImplTest {
         //turma
         when(escolaServiceSpy.criarTurma()).thenReturn(new Turma("Teste"));
         doCallRealMethod().when(escolaServiceSpy).criarTurma();
-        escolaServiceSpy.cadastrarTurma();
+        escolaServiceSpy.adicionarTurma();
         //Aluno
-        when(escolaServiceSpy.criarAluno()).thenReturn(new Aluno("Tom",
+        when(alunoService.criarAluno(new Aluno())).thenReturn(new Aluno("Tom",
                 "Hanks", 23));
         doCallRealMethod().when(escolaServiceSpy).criarAluno();
-        Aluno aluno = escolaServiceSpy.criarAluno();
+        Aluno aluno = alunoService.criarAluno(new Aluno());
         //ação
         escolaServiceSpy.cadastrarAluno();
         //verificação
@@ -98,7 +96,7 @@ public class EscolaServiceImplTest {
         doCallRealMethod().when(escolaServiceSpy).criarEscola("IBM");
         escola = escolaServiceSpy.criarEscola("IBM");
         //escola
-        when(escolaServiceSpy.criarAluno()).thenReturn(new Aluno("Tom",
+        when(alunoService.criarAluno(new Aluno())).thenReturn(new Aluno("Tom",
                 "Hanks", 23));
         //ação
         try {
@@ -121,12 +119,12 @@ public class EscolaServiceImplTest {
         //turma
         when(escolaServiceSpy.criarTurma()).thenReturn(new Turma("Teste"));
         doCallRealMethod().when(escolaServiceSpy).criarTurma();
-        escolaServiceSpy.cadastrarTurma();
+        escolaServiceSpy.adicionarTurma();
         //escola
-        when(escolaServiceSpy.criarAluno()).thenReturn(new Aluno("Tom",
+        when(alunoService.criarAluno(new Aluno())).thenReturn(new Aluno("Tom",
                 "Hanks", 23));
         doCallRealMethod().when(escolaServiceSpy).criarAluno();
-        Aluno aluno = escolaServiceSpy.criarAluno();
+        Aluno aluno = alunoService.criarAluno(new Aluno());
         escolaServiceSpy.cadastrarAluno();
         when(alunoService.solicitarNomeAluno()).thenReturn("Tom");
         when(turmaService.localizarAlunoNome("Tom")).thenReturn(aluno);
@@ -151,12 +149,12 @@ public class EscolaServiceImplTest {
         //turma
         when(escolaServiceSpy.criarTurma()).thenReturn(new Turma("Teste"));
         doCallRealMethod().when(escolaServiceSpy).criarTurma();
-        escolaServiceSpy.cadastrarTurma();
+        escolaServiceSpy.adicionarTurma();
         //escola
-        when(escolaServiceSpy.criarAluno()).thenReturn(new Aluno("Tom",
+        when(alunoService.criarAluno(new Aluno())).thenReturn(new Aluno("Tom",
                 "Hanks", 23));
         doCallRealMethod().when(escolaServiceSpy).criarAluno();
-        Aluno aluno = escolaServiceSpy.criarAluno();
+        Aluno aluno = alunoService.criarAluno(new Aluno());
         escolaServiceSpy.cadastrarAluno();
         when(alunoService.solicitarNomeAluno()).thenReturn("Tom");
         when(turmaService.localizarAlunoNome("Tom")).thenReturn(aluno);
@@ -181,12 +179,12 @@ public class EscolaServiceImplTest {
         //turma
         when(escolaServiceSpy.criarTurma()).thenReturn(new Turma("Teste"));
         doCallRealMethod().when(escolaServiceSpy).criarTurma();
-        escolaServiceSpy.cadastrarTurma();
+        escolaServiceSpy.adicionarTurma();
         //escola
-        when(escolaServiceSpy.criarAluno()).thenReturn(new Aluno("Tom",
+        when(alunoService.criarAluno(new Aluno())).thenReturn(new Aluno("Tom",
                 "Hanks", 23));
         doCallRealMethod().when(escolaServiceSpy).criarAluno();
-        Aluno aluno = escolaServiceSpy.criarAluno();
+        Aluno aluno = alunoService.criarAluno(new Aluno());
         escolaServiceSpy.cadastrarAluno();
         when(alunoService.solicitarNomeAluno()).thenReturn("Tom");
         when(turmaService.localizarAlunoNome("Tom")).thenReturn(aluno);
@@ -208,7 +206,7 @@ public class EscolaServiceImplTest {
         escola = escolaServiceSpy.criarEscola("IBM");
         //turma
         doCallRealMethod().when(escolaServiceSpy).criarTurma();
-        escolaServiceSpy.cadastrarTurma();
+        escolaServiceSpy.adicionarTurma();
         Aluno aluno1 = new Aluno("John",
                 "Hanks", 23);
         Aluno aluno2 = new Aluno("Tom",
@@ -226,7 +224,7 @@ public class EscolaServiceImplTest {
         doReturn(aluno2).when(escolaServiceSpy).localizarAluno();
         doReturn("yes").when(escolaServiceSpy).solicitarConfirmacao();
         //ação
-        escolaServiceSpy.excluirAluno();
+        escolaServiceSpy.removerAluno();
         //verificação
         Assert.assertFalse(escolaServiceSpy.localizarTodosAlunos().contains(aluno2));
     }
@@ -238,10 +236,10 @@ public class EscolaServiceImplTest {
         escola = escolaServiceSpy.criarEscola("IBM");
         //turma
         doCallRealMethod().when(escolaServiceSpy).criarTurma();
-        escolaServiceSpy.cadastrarTurma();
+        escolaServiceSpy.adicionarTurma();
         //ação
         try {
-            escolaServiceSpy.excluirAluno();
+            escolaServiceSpy.removerAluno();
             Assert.fail();
         } catch (Exception e) {
             //verificação
@@ -257,7 +255,7 @@ public class EscolaServiceImplTest {
         escola = escolaServiceSpy.criarEscola("IBM");
         //turma
         doCallRealMethod().when(escolaServiceSpy).criarTurma();
-        escolaServiceSpy.cadastrarTurma();
+        escolaServiceSpy.adicionarTurma();
         Aluno aluno1 = new Aluno("John",
                 "Hanks", 23);
         Aluno aluno2 = new Aluno("Tom",
@@ -285,7 +283,7 @@ public class EscolaServiceImplTest {
         escola = escolaServiceSpy.criarEscola("IBM");
         //turma
         doCallRealMethod().when(escolaServiceSpy).criarTurma();
-        escolaServiceSpy.cadastrarTurma();
+        escolaServiceSpy.adicionarTurma();
         //açao
         try {
           escolaServiceSpy.localizarTodosAlunos();
@@ -322,7 +320,7 @@ public class EscolaServiceImplTest {
         Turma turma = new Turma("Turma Teste");
         when(escolaServiceSpy.criarTurma()).thenReturn(turma);
         //ação
-        escolaServiceSpy.cadastrarTurma();
+        escolaServiceSpy.adicionarTurma();
         //verificação
         Assert.assertTrue(escola.getTurmas().contains(turma));
     }
@@ -337,7 +335,7 @@ public class EscolaServiceImplTest {
         //turma
         Turma turma = new Turma("Turma Teste");
         when(escolaServiceSpy.criarTurma()).thenReturn(turma);
-        escolaServiceSpy.cadastrarTurma();
+        escolaServiceSpy.adicionarTurma();
         when(turmaService.solicitarNomeTurma()).thenReturn("Turma Teste");
         when(escolaServiceSpy.localizarUmaTurma("Turma Teste")).thenReturn(turma);
         doReturn("Novo Nome").when(turmaService).solicitarNovoNomeTurma();
@@ -354,15 +352,15 @@ public class EscolaServiceImplTest {
         //escola
         doCallRealMethod().when(escolaServiceSpy).criarEscola("IBM");
         escola = escolaServiceSpy.criarEscola("IBM");
-        doCallRealMethod().when(escolaServiceSpy).excluirTurma();
+        doCallRealMethod().when(escolaServiceSpy).removerTurma();
         //turma
         Turma turma = new Turma("Turma Teste");
         when(escolaServiceSpy.criarTurma()).thenReturn(turma);
-        escolaServiceSpy.cadastrarTurma();
+        escolaServiceSpy.adicionarTurma();
         when(turmaService.solicitarNomeTurma()).thenReturn("Turma Teste");
         doReturn("y").when(escolaServiceSpy).solicitarConfirmacao();
         //ação
-        escolaServiceSpy.excluirTurma();
+        escolaServiceSpy.removerTurma();
         //verificação
         Assert.assertTrue(escola.getTurmas().isEmpty());
     }
@@ -372,17 +370,17 @@ public class EscolaServiceImplTest {
         //escola
         doCallRealMethod().when(escolaServiceSpy).criarEscola("IBM");
         escola = escolaServiceSpy.criarEscola("IBM");
-        doCallRealMethod().when(escolaServiceSpy).excluirTurma();
+        doCallRealMethod().when(escolaServiceSpy).removerTurma();
         //turma
         Turma turma = new Turma("Turma Teste");
         when(escolaServiceSpy.criarTurma()).thenReturn(turma);
-        escolaServiceSpy.cadastrarTurma();
+        escolaServiceSpy.adicionarTurma();
         when(turmaService.solicitarNomeTurma()).thenReturn("Turma Teste");
 
         doReturn("sim").when(escolaServiceSpy).solicitarConfirmacao();
 
         //ação
-        escolaServiceSpy.excluirTurma();
+        escolaServiceSpy.removerTurma();
         //verificação
         MatcherAssert.assertThat(escolaServiceSpy.solicitarConfirmacao(), CoreMatchers.is("sim"));
     }
@@ -401,7 +399,7 @@ public class EscolaServiceImplTest {
         listaDeTurmas.add(turma1);
         listaDeTurmas.add(turma2);
         listaDeTurmas.add(turma3);
-        escolaServiceSpy.cadastrarTurma();
+        escolaServiceSpy.adicionarTurma();
         escola.setTurmas(listaDeTurmas);
         //ação
         escolaServiceSpy.localizarTodasTurmas();
@@ -423,7 +421,7 @@ public class EscolaServiceImplTest {
         listaDeTurmas.add(turma1);
         listaDeTurmas.add(turma2);
         listaDeTurmas.add(turma3);
-        escolaServiceSpy.cadastrarTurma();
+        escolaServiceSpy.adicionarTurma();
         escola.setTurmas(listaDeTurmas);
         Aluno aluno1 = new Aluno("Tom","Hanks", 23, 12346);
         turma2.setAlunos(aluno1);
@@ -462,7 +460,7 @@ public class EscolaServiceImplTest {
         listaDeTurmas.add(turma1);
         listaDeTurmas.add(turma2);
         listaDeTurmas.add(turma3);
-        escolaServiceSpy.cadastrarTurma();
+        escolaServiceSpy.adicionarTurma();
         escola.setTurmas(listaDeTurmas);
 
 
@@ -498,7 +496,7 @@ public class EscolaServiceImplTest {
         List<Turma> listaDeTurmas = new ArrayList<>();
         listaDeTurmas.add(turma1);
 
-        escolaServiceSpy.cadastrarTurma();
+        escolaServiceSpy.adicionarTurma();
         escola.setTurmas(listaDeTurmas);
 
         turma1.setAlunos(aluno);
@@ -520,12 +518,12 @@ public class EscolaServiceImplTest {
         when(escolaServiceSpy.criarTurma()).thenReturn(new Turma("Teste"));
         doCallRealMethod().when(escolaServiceSpy).criarTurma();
         Turma turma = escolaServiceSpy.criarTurma();
-        escolaServiceSpy.cadastrarTurma();
+        escolaServiceSpy.adicionarTurma();
         //Aluno
-        when(escolaServiceSpy.criarAluno()).thenReturn(new Aluno("Tom",
+        when(alunoService.criarAluno(new Aluno())).thenReturn(new Aluno("Tom",
                 "Hanks", 23, 12345));
         doCallRealMethod().when(escolaServiceSpy).criarAluno();
-        Aluno aluno = escolaServiceSpy.criarAluno();
+        Aluno aluno = alunoService.criarAluno(new Aluno());
         escolaServiceSpy.cadastrarAluno();
         turma.setAlunos(aluno);
         //ação
@@ -541,10 +539,10 @@ public class EscolaServiceImplTest {
         doCallRealMethod().when(escolaServiceSpy).criarEscola("IBM");
         escola = escolaServiceSpy.criarEscola("IBM");
         //Aluno
-        when(escolaServiceSpy.criarAluno()).thenReturn(new Aluno("Tom",
+        when(alunoService.criarAluno(new Aluno())).thenReturn(new Aluno("Tom",
                 "Hanks", 23, 12345));
         doCallRealMethod().when(escolaServiceSpy).criarAluno();
-        Aluno aluno = escolaServiceSpy.criarAluno();
+        Aluno aluno = alunoService.criarAluno(new Aluno());
         //ação
         Turma turmaTeste = escolaServiceSpy.localizarTurmaPorAluno(aluno);
         //verificação

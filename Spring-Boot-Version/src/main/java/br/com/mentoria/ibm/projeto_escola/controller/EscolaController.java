@@ -1,5 +1,6 @@
 package br.com.mentoria.ibm.projeto_escola.controller;
 
+import br.com.mentoria.ibm.projeto_escola.model.Aluno;
 import br.com.mentoria.ibm.projeto_escola.model.Escola;
 import br.com.mentoria.ibm.projeto_escola.model.Turma;
 import br.com.mentoria.ibm.projeto_escola.service.EscolaService;
@@ -35,26 +36,35 @@ public class EscolaController {
 
     }
 
-
-
     @PutMapping()
     public ResponseEntity<Escola> atualizarEscola(@RequestBody Escola escola) {
         return new ResponseEntity<>(escolaService.atualizarEscola(escola), HttpStatus.OK);
 
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Escola> cadastrarTurma(@PathVariable("id") int id,@RequestBody Turma turma){
-        Escola escola = escolaService.cadastrarTurma(id ,turma);
+    @PutMapping(value = "{id}/cadastrarTurma")
+    public ResponseEntity<?> cadastrarTurma(@PathVariable("id") int id,@RequestBody Turma turma){
+        Escola escola = escolaService.adicionarTurma(id ,turma);
        if(escola == null){
-           return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+           String texto = "Turma já cadastrada/Escola sem capacidade p/ mais turmas";
+           return new ResponseEntity<>(HttpStatus.FORBIDDEN);
        }else {
            return new ResponseEntity<>(escola, HttpStatus.OK);
        }
 
     }
 
-
+    @PutMapping("/removerTurma/{id}")
+    public ResponseEntity<?> removerTurma(@PathVariable("id") int id){
+       Escola escola= escolaService.removerTurma(id);
+       if (escola == null){
+           String texto = "Turma não consta na lista da Escola";
+           return new ResponseEntity<>(texto, HttpStatus.FORBIDDEN);
+       }
+       else {
+           return new ResponseEntity<>(escola, HttpStatus.OK);
+       }
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Escola> excluirEscola(@PathVariable(value = "id") int id) {
@@ -62,7 +72,5 @@ public class EscolaController {
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
-
-
 
 }

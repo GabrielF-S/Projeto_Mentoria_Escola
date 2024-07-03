@@ -24,8 +24,6 @@ public class Escola implements Serializable {
     @OneToMany
     private List<Turma> turmas;
 
-    @OneToMany
-    private List<Aluno> alunos;
 
     public Escola() {
 
@@ -52,15 +50,7 @@ public class Escola implements Serializable {
         this.turmas.add(turma);
     }
 
-    public List<Aluno> getAlunos() {
-        return alunos;
-    }
-
-    public void setAlunos(List<Aluno> alunos) {
-        this.alunos = alunos;
-    }
-
-    public int getTAMANHO_MAX() {
+        public int getTAMANHO_MAX() {
         return TAMANHO_MAX;
     }
 

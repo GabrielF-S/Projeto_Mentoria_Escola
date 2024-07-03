@@ -44,10 +44,9 @@ public class Turma {
         return alunos;
     }
 
-    public void setAlunos(Aluno aluno) {
-        alunos.add(aluno);
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
     }
-
 
     @Override
     public String toString() {
@@ -72,17 +71,16 @@ public class Turma {
     }
 
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Turma turma = (Turma) o;
-        return id == turma.id && Objects.equals(nomeTurma, turma.nomeTurma);
+        return Objects.equals(nomeTurma, turma.nomeTurma);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nomeTurma);
+        return Objects.hash(nomeTurma);
     }
 }

@@ -1,5 +1,6 @@
 package br.com.mentoria.ibm.projeto_escola.controller;
 
+import br.com.mentoria.ibm.projeto_escola.model.Aluno;
 import br.com.mentoria.ibm.projeto_escola.model.Turma;
 import br.com.mentoria.ibm.projeto_escola.service.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +28,15 @@ public class TurmaController {
     }
 
     @PostMapping("/{nome}")
-    public ResponseEntity<Turma> criarTurma(@PathVariable("nome") String nome) {
+    public ResponseEntity<?> criarTurma(@PathVariable("nome") String nome) {
         Turma turma = turmaService.criarTurma(nome);
         if (turma != null) {
             return new ResponseEntity<>(turma, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(turma, HttpStatus.EXPECTATION_FAILED);
+            String texto = "Já existe turma com este nome";
+            return new ResponseEntity<>(texto, HttpStatus.FORBIDDEN);
         }
-
     }
-
-
     @PutMapping
     public ResponseEntity<Turma> atualizarTurma(@RequestBody Turma turma) {
         Turma turmaBD = turmaService.atualizarNomeTurma(turma);
@@ -49,13 +48,27 @@ public class TurmaController {
         }
     }
 
+    @PutMapping("/{id}/adicionarAluno")
+    public ResponseEntity<?> adicionarAluno(@PathVariable("id") int id, @RequestBody Aluno aluno) {
+        Turma turma = turmaService.adicionarAluno(id, aluno);
+        if (turma != null) {
+            return new ResponseEntity<>(turma, HttpStatus.OK);
+        } else{
+            String texto = "Turma sem vagas";
+            return new ResponseEntity<>(texto, HttpStatus.FORBIDDEN);
+        }
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity excluirTurma(@PathVariable("id") int id) {
         turmaService.deletarTurma(id);
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
+    @DeleteMapping("{id}/removerAluno")
+    public ResponseEntity<?> removerAluno(@PathVariable("id")int id, @RequestBody Aluno aluno){
+        turmaService.removerAluno(id ,aluno);
 
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

@@ -1,7 +1,6 @@
 package br.com.mentoria.ibm.projeto_escola.service;
 
 import br.com.mentoria.ibm.projeto_escola.model.Aluno;
-import br.com.mentoria.ibm.projeto_escola.view.Inputs;
 import org.hamcrest.MatcherAssert;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +41,7 @@ public class AlunoServiceImplTest {
         doReturn(27).when(alunoServiceSpy).solicitarIdadeAluno();
         doCallRealMethod().when(alunoServiceSpy).criarAluno();
         //ação
-        Aluno alunoTest = alunoServiceSpy.criarAluno();
+        Aluno alunoTest = alunoServiceSpy.criarAluno(new Aluno());
         //verificação
         MatcherAssert.assertThat(alunoTest, instanceOf(Aluno.class));
     }
