@@ -46,11 +46,11 @@ public class Escola implements Serializable {
         return turmas;
     }
 
-    public void setTurmas(Turma turma) {
-        this.turmas.add(turma);
+    public void setTurmas(List<Turma> turmas) {
+        this.turmas = turmas;
     }
 
-        public int getTAMANHO_MAX() {
+    public int getTAMANHO_MAX() {
         return TAMANHO_MAX;
     }
 

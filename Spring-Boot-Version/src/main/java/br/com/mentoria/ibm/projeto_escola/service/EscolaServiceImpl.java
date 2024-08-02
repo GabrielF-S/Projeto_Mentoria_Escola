@@ -27,8 +27,10 @@ public class EscolaServiceImpl implements EscolaService {
                 System.out.println("Turma já cadastrada");
                 return null;
             } else {
+                List<Turma> turmaList = escola.getTurmas();
+                turmaList.add(turma);
                 System.out.println("Turma Cadastrada");
-                escola.setTurmas(turma);
+                escola.setTurmas(turmaList);
                 return escolaRepo.save(escola);
             }
         }

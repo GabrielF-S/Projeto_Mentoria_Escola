@@ -14,13 +14,14 @@ public class AlunoServiceImpl implements AlunoService {
 
     @Override
     public Aluno criarAluno(Aluno aluno) {
-                return alunoRepo.save(aluno);
+        return alunoRepo.save(aluno);
     }
 
     @Override
     public Aluno localizarAlunoPorId(int id) {
         return alunoRepo.findById(id).get();
     }
+
     @Override
     public Aluno atualizarAluno(Aluno aluno) {
         return alunoRepo.save(aluno);
@@ -33,6 +34,6 @@ public class AlunoServiceImpl implements AlunoService {
 
     @Override
     public void deletarAluno(int id) {
-         alunoRepo.deleteById(id);
+        alunoRepo.deleteById(id);
     }
 }

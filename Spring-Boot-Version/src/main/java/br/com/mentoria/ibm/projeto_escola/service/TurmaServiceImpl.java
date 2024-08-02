@@ -32,7 +32,7 @@ public class TurmaServiceImpl implements TurmaService {
         }
         return null;
     }
-    
+
     @Override
     public Turma removerAluno(int id, Aluno aluno)  {
         Turma turma = localizarTurmaPorId(id);

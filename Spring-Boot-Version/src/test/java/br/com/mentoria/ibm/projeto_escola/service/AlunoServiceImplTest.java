@@ -1,7 +1,7 @@
 package br.com.mentoria.ibm.projeto_escola.service;
 
 import br.com.mentoria.ibm.projeto_escola.model.Aluno;
-import org.hamcrest.MatcherAssert;
+import br.com.mentoria.ibm.projeto_escola.repository.AlunoRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,150 +11,146 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.hamcrest.CoreMatchers.*;
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AlunoServiceImplTest {
     @InjectMocks
     private AlunoServiceImpl alunoService;
+
     @Mock
-    private Inputs scanner;
+    private AlunoRepository alunoRepo;
 
     AlunoServiceImpl alunoServiceSpy;
 
+    Aluno aluno;
 
     @Before
     public void setup() {
         MockitoAnnotations.openMocks(this);
         alunoServiceSpy = spy(alunoService);
-        scanner = Mockito.mock(Inputs.class);
+        alunoRepo = Mockito.mock(AlunoRepository.class);
+        aluno = new Aluno("John", "Doe", 27, 1);
+
 
     }
 
-    //verificar a criação do Aluno
+    //Todo criar aluno
+    @Test
+    public void deveVerificarSeMetodoDeCriarAlunoFoiChamado() {
+        //cenario
+
+
+        //ação
+        alunoServiceSpy.criarAluno(aluno);
+
+        //verificação
+        verify(alunoServiceSpy, times(1)).criarAluno(aluno);
+    }
+
     @Test
     public void deveVerificarSeAInstanciaCriadaEhDaClasseAluno() {
         //cenario
-        doReturn("John").when(alunoServiceSpy).solicitarNomeAluno();
-        doReturn("Doe").when(alunoServiceSpy).solicitarSobrenomeAluno();
-        doReturn(27).when(alunoServiceSpy).solicitarIdadeAluno();
-        doCallRealMethod().when(alunoServiceSpy).criarAluno();
+          doReturn(aluno).when(alunoServiceSpy).criarAluno(aluno);
         //ação
-        Aluno alunoTest = alunoServiceSpy.criarAluno(new Aluno());
+        Aluno alunoTest = alunoServiceSpy.criarAluno(aluno);
         //verificação
-        MatcherAssert.assertThat(alunoTest, instanceOf(Aluno.class));
+        assertThat(alunoTest, instanceOf(Aluno.class));
     }
 
+    @Test
+    public void deveVerificarSeNomeDoAlunoEstaCorreto() {
+        //cenario
+        doReturn(aluno).when(alunoServiceSpy).criarAluno(aluno);
+        //ação
+        Aluno alunoTest = alunoServiceSpy.criarAluno(aluno);
+        //verificação
+        assertThat(alunoTest.getPrimeiroNomeAluno(), is("John"));
+    }
+    //Todo localizarAlunoPorID
+    @Test
+    public  void deveLocalizarUmAlunoPorId(){
+        //cenario
+        doReturn(aluno).when(alunoServiceSpy).localizarAlunoPorId(1);
+        //Todo verificar
+        //ação
+       Aluno alunotest = alunoServiceSpy.localizarAlunoPorId(1);
+
+        //verificação
+        assertThat(alunotest, is(aluno));
+    }
+    @Test
+    public  void deveVerificarAssionamentodeMetodoLocalizarUmAlunoPorId(){
+        //cenario
+        doReturn(aluno).when(alunoServiceSpy).localizarAlunoPorId(1);
+        //Todo verificar
+        //ação
+        Aluno alunotest = alunoServiceSpy.localizarAlunoPorId(1);
+
+        //verificação
+        verify(alunoServiceSpy, atLeastOnce()).localizarAlunoPorId(1);
+    }
+
+    //todo localizarTodosAlunos
+    @Test
+    public void deveRetornarListaCom3Alunos(){
+        //cenario
+        doReturn(List.of(new Aluno("John", "Doe", 27, 1),
+                new Aluno("Ivan", "Doe", 27, 2),
+                new Aluno("Isac","Doe", 27, 3)))
+                .when(alunoServiceSpy).localizarTodosAlunos();
+        //ação
+        List<Aluno> alunosList = alunoServiceSpy.localizarTodosAlunos();
+
+        //verificação
+        assertThat(alunosList.size(), is(3));
+    }
+    //Todo deletarAluno
 
     //verificar atualização de aluno
     @Test
     public void deveVerificarSeAtualizouNomeDoAluno() {
         //cenario
         Aluno aluno = new Aluno("Jose", "Alguém", 27);
-        doReturn("John").when(alunoServiceSpy).solicitarNovoNomeAluno();
-        doReturn("Doe").when(alunoServiceSpy).solicitarNovoSobrenomeAluno();
-        doReturn(27).when(alunoServiceSpy).solicitarNovaIdadeAluno();
+        doCallRealMethod().when(alunoServiceSpy).atualizarAluno(aluno);
+        //TODO verificar como realizar este teste
+        aluno.setPrimeiroNomeAluno("John");
         //ação
         alunoServiceSpy.atualizarAluno(aluno);
         //verificação
-        MatcherAssert.assertThat(aluno.getPrimeiroNomeAluno(), is("John"));
+        assertThat(aluno.getPrimeiroNomeAluno(), is("John"));
     }
 
     @Test
     public void deveVerificarSeAtualizouSobrenomeDoAluno() {
         //cenario
         Aluno aluno = new Aluno("Jose", "Alguém", 27);
-        doReturn("John").when(alunoServiceSpy).solicitarNovoNomeAluno();
-        doReturn("Doe").when(alunoServiceSpy).solicitarNovoSobrenomeAluno();
-        doReturn(27).when(alunoServiceSpy).solicitarNovaIdadeAluno();
+
         //ação
         alunoServiceSpy.atualizarAluno(aluno);
+        //TODO verificar como realizar este teste
+        aluno.setSobrenomeAluno("Doe");
         //verificação
-        MatcherAssert.assertThat(aluno.getSobrenomeAluno(), is("Doe"));
+        assertThat(aluno.getSobrenomeAluno(), is("Doe"));
     }
 
     @Test
     public void deveVerificarSeAtualizouIdadeDoAluno() {
         //cenario
         Aluno aluno = new Aluno("Jose", "Alguém", 23);
-        doReturn("John").when(alunoServiceSpy).solicitarNovoNomeAluno();
-        doReturn("Doe").when(alunoServiceSpy).solicitarNovoSobrenomeAluno();
-        doReturn(27).when(alunoServiceSpy).solicitarNovaIdadeAluno();
+
         //ação
         alunoServiceSpy.atualizarAluno(aluno);
+        //TODO verificar como realizar este teste
+        aluno.setIdade(27);
         //verificação
-        MatcherAssert.assertThat(aluno.getIdade(), is(27));
+        assertThat(aluno.getIdade(), is(27));
     }
 
-    //verificar solicitação de idade
-    @Test
-    public void deveRetornarIdadeDoAlunoQuandoCriado() {
-        //cenario
-        doReturn(27).when(alunoServiceSpy).solicitarIdadeAluno();
-        //ação
-        alunoService.solicitarIdadeAluno();
-        //verificação
-        MatcherAssert.assertThat(alunoServiceSpy.solicitarIdadeAluno(), is(27));
 
-    }
-
-    //verificar solicitação de sobrenome
-    @Test
-    public void deveRetornarSobreNomeDoAlunoQuandoCriado() {
-        //cenario
-        doReturn("Doe").when(alunoServiceSpy).solicitarSobrenomeAluno();
-        //ação
-        alunoService.solicitarSobrenomeAluno();
-        //verificação
-        MatcherAssert.assertThat(alunoServiceSpy.solicitarSobrenomeAluno(), is("Doe"));
-
-    }
-
-    //verificar solicitação de nome
-    @Test
-    public void deveRetornarNomeDoAlunoQuandoCriado() {
-        //cenario
-        doReturn("John").when(alunoServiceSpy).solicitarNomeAluno();
-        //ação
-        alunoService.solicitarNomeAluno();
-        //verificação
-        MatcherAssert.assertThat(alunoServiceSpy.solicitarNomeAluno(), is("John"));
-
-    }
-    @Test
-    public void deveRetornarNovaIdadeDoAluno() {
-        //cenario
-        doReturn(27).when(alunoServiceSpy).solicitarNovaIdadeAluno();
-        //ação
-        alunoService.solicitarNovaIdadeAluno();
-        //verificação
-        MatcherAssert.assertThat(alunoServiceSpy.solicitarNovaIdadeAluno(), is(27));
-
-    }
-
-    //verificar solicitação de sobrenome
-    @Test
-    public void deveRetornarNovoSobreNomeDoAlunoQuandoCriado() {
-        //cenario
-        doReturn("Doe").when(alunoServiceSpy).solicitarNovoSobrenomeAluno();
-
-        //ação
-        alunoService.solicitarNovoSobrenomeAluno();
-        //verificação
-        MatcherAssert.assertThat(alunoServiceSpy.solicitarNovoSobrenomeAluno(), is("Doe"));
-
-    }
-
-    //verificar solicitação de nome
-    @Test
-    public void deveRetornarNovoNomeDoAlunoQuandoCriado() {
-        //cenario
-        doReturn("John").when(alunoServiceSpy).solicitarNovoNomeAluno();
-        //ação
-        alunoService.solicitarNovoNomeAluno();
-        //verificação
-        MatcherAssert.assertThat(alunoServiceSpy.solicitarNovoNomeAluno(), is("John"));
-
-    }
 }

@@ -56,6 +56,15 @@
             <version>4.1.0</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.jacoco/org.jacoco.agent -->
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.agent</artifactId>
+            <version>0.8.7</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
