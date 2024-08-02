@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: notas-sender
+server:
+  port: ${PORT:8001}
