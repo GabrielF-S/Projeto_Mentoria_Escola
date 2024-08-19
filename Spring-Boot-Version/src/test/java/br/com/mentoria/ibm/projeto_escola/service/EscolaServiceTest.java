@@ -1,5 +1,6 @@
 package br.com.mentoria.ibm.projeto_escola.service;
 
+import br.com.mentoria.ibm.projeto_escola.service.impl.EscolaServiceImpl;
 import org.junit.Before;
 import org.mockito.Mock;
 import org.mockito.Mockito;

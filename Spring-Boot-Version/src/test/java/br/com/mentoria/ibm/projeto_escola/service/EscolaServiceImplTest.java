@@ -1,8 +1,10 @@
 package br.com.mentoria.ibm.projeto_escola.service;
 
-import br.com.mentoria.ibm.projeto_escola.model.Aluno;
 import br.com.mentoria.ibm.projeto_escola.model.Escola;
 import br.com.mentoria.ibm.projeto_escola.model.Turma;
+import br.com.mentoria.ibm.projeto_escola.service.impl.AlunoServiceImpl;
+import br.com.mentoria.ibm.projeto_escola.service.impl.EscolaServiceImpl;
+import br.com.mentoria.ibm.projeto_escola.service.impl.TurmaServiceImpl;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
@@ -11,12 +13,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.*;

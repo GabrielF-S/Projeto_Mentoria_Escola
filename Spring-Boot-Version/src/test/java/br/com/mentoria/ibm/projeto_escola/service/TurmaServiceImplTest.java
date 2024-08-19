@@ -2,6 +2,8 @@ package br.com.mentoria.ibm.projeto_escola.service;
 
 import br.com.mentoria.ibm.projeto_escola.model.Aluno;
 import br.com.mentoria.ibm.projeto_escola.model.Turma;
+import br.com.mentoria.ibm.projeto_escola.service.impl.AlunoServiceImpl;
+import br.com.mentoria.ibm.projeto_escola.service.impl.TurmaServiceImpl;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.Assert;
@@ -53,7 +55,7 @@ public class TurmaServiceImplTest {
         //cenario
 
         Aluno alunoTeste = alunoService.criarAluno(new Aluno());
-        Aluno alunoTest2 = new Aluno("John", "Doe", 27);
+        Aluno alunoTest2 = new Aluno("John", "Doe", 27, "teste@mail.com");
         //ação
         turmaServiceSpy.adicionarAluno(turmaTest.getId(), alunoTeste);
         //verificação
@@ -63,10 +65,10 @@ public class TurmaServiceImplTest {
     @Test
     public void deveLancarExeptionQuandoTurmaCheia() throws Exception {
         //cenario
-        Aluno alunoTest1 = new Aluno("John1", "Doe1", 27);
-        Aluno alunoTest2 = new Aluno("John2", "Doe2", 27);
-        Aluno alunoTest3 = new Aluno("John3", "Doe3", 27);
-        Aluno alunoTest4 = new Aluno("John", "Doe", 27);
+        Aluno alunoTest1 = new Aluno("John1", "Doe1", 27,"teste@mail.com");
+        Aluno alunoTest2 = new Aluno("John2", "Doe2", 27,"teste@mail.com");
+        Aluno alunoTest3 = new Aluno("John3", "Doe3", 27,"teste@mail.com");
+        Aluno alunoTest4 = new Aluno("John", "Doe", 27,"teste@mail.com");
         turmaServiceSpy.adicionarAluno(turmaTest.getId(), alunoTest1);
         turmaServiceSpy.adicionarAluno(turmaTest.getId(), alunoTest2);
         turmaServiceSpy.adicionarAluno(turmaTest.getId(), alunoTest3);
@@ -94,11 +96,11 @@ public class TurmaServiceImplTest {
     public void deveRetornarTruQuandoTurmaContem3Alunos() throws Exception {
         //cenario
         Aluno alunoTest1 = new Aluno("John1", "Doe1",
-                27);
+                27,"teste@mail.com");
         Aluno alunoTest2 = new Aluno("John2", "Doe2",
-                27);
+                27,"teste@mail.com");
         Aluno alunoTest3 = new Aluno("John3", "Doe3",
-                27);
+                27,"teste@mail.com");
 
         turmaServiceSpy.adicionarAluno(turmaTest.getId(), alunoTest1);
         turmaServiceSpy.adicionarAluno(turmaTest.getId(), alunoTest2);

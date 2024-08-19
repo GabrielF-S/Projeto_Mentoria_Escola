@@ -2,6 +2,7 @@ package br.com.mentoria.ibm.projeto_escola.service;
 
 import br.com.mentoria.ibm.projeto_escola.model.Aluno;
 import br.com.mentoria.ibm.projeto_escola.repository.AlunoRepository;
+import br.com.mentoria.ibm.projeto_escola.service.impl.AlunoServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +26,7 @@ public class AlunoServiceImplTest {
 
     @Mock
     private AlunoRepository alunoRepo;
-
+    @Mock
     AlunoServiceImpl alunoServiceSpy;
 
     Aluno aluno;
@@ -35,7 +36,7 @@ public class AlunoServiceImplTest {
         MockitoAnnotations.openMocks(this);
         alunoServiceSpy = spy(alunoService);
         alunoRepo = Mockito.mock(AlunoRepository.class);
-        aluno = new Aluno("John", "Doe", 27, 1);
+        aluno = new Aluno("John", "Doe", 27, "teste@mail.com");
 
 
     }
@@ -100,9 +101,9 @@ public class AlunoServiceImplTest {
     @Test
     public void deveRetornarListaCom3Alunos(){
         //cenario
-        doReturn(List.of(new Aluno("John", "Doe", 27, 1),
-                new Aluno("Ivan", "Doe", 27, 2),
-                new Aluno("Isac","Doe", 27, 3)))
+        doReturn(List.of(new Aluno("John", "Doe", 27,"teste@mail.com" ),
+                new Aluno("Ivan", "Doe", 27, "teste@mail.com"),
+                new Aluno("Isac","Doe", 27, "teste@mail.com")))
                 .when(alunoServiceSpy).localizarTodosAlunos();
         //ação
         List<Aluno> alunosList = alunoServiceSpy.localizarTodosAlunos();
@@ -116,7 +117,7 @@ public class AlunoServiceImplTest {
     @Test
     public void deveVerificarSeAtualizouNomeDoAluno() {
         //cenario
-        Aluno aluno = new Aluno("Jose", "Alguém", 27);
+        Aluno aluno = new Aluno("Jose", "Alguém", 27, "teste@mail.com");
         doCallRealMethod().when(alunoServiceSpy).atualizarAluno(aluno);
         //TODO verificar como realizar este teste
         aluno.setPrimeiroNomeAluno("John");
@@ -129,7 +130,7 @@ public class AlunoServiceImplTest {
     @Test
     public void deveVerificarSeAtualizouSobrenomeDoAluno() {
         //cenario
-        Aluno aluno = new Aluno("Jose", "Alguém", 27);
+        Aluno aluno = new Aluno("Jose", "Alguém", 27,"teste@mail.com");
 
         //ação
         alunoServiceSpy.atualizarAluno(aluno);
@@ -142,7 +143,7 @@ public class AlunoServiceImplTest {
     @Test
     public void deveVerificarSeAtualizouIdadeDoAluno() {
         //cenario
-        Aluno aluno = new Aluno("Jose", "Alguém", 23);
+        Aluno aluno = new Aluno("Jose", "Alguém", 23, "teste@mail.com");
 
         //ação
         alunoServiceSpy.atualizarAluno(aluno);

@@ -11,4 +11,6 @@ public interface AlunoService {
     Aluno localizarAlunoPorId(int id);
     List<Aluno> localizarTodosAlunos();
     void deletarAluno(int id);
+
+    Object lancarAprovacao(Aluno aluno);
 }

@@ -2,13 +2,19 @@ package br.com.mentoria.ibm.projeto_escola.model;
 
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+@Getter @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_escola")
 public class Escola implements Serializable {
@@ -24,42 +30,7 @@ public class Escola implements Serializable {
     @OneToMany
     private List<Turma> turmas;
 
-
-    public Escola() {
-
-    }
-
     public Escola(String nomeEscola) {
-        setNomeEscola(nomeEscola);
-    }
-
-
-    public String getNomeEscola() {
-        return nomeEscola;
-    }
-
-    public void setNomeEscola(String nomeEscola) {
         this.nomeEscola = nomeEscola;
     }
-
-    public List<Turma> getTurmas() {
-        return turmas;
-    }
-
-    public void setTurmas(List<Turma> turmas) {
-        this.turmas = turmas;
-    }
-
-    public int getTAMANHO_MAX() {
-        return TAMANHO_MAX;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
 }
