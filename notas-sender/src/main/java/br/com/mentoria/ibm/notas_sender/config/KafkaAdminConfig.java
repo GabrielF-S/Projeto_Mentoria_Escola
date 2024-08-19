@@ -25,7 +25,6 @@ public class KafkaAdminConfig {
         return new KafkaAdmin(configs);
 
     }
-
     @Bean
     public KafkaAdmin.NewTopics topics(){
         return new KafkaAdmin.NewTopics(
