@@ -1,72 +1,43 @@
 package br.com.mentoria.ibm.projeto_escola.model;
 
+import br.com.mentoria.ibm.projeto_escola.service.util.Status;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_aluno")
 public class Aluno {
+
+    @Column(name = "nome_aluno")
+    private String primeiroNomeAluno;
+    @Column(name = "sobrenome_aluno")
+    private String sobrenomeAluno;
+    @Column(name = "idade_aluno")
+    private int idade;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_aluno")
     private Integer id;
-    @Column(name = "nomealuno")
-    private String primeiroNomeAluno;
-    @Column(name = "sobrenomealuno")
-    private String sobrenomeAluno;
-    @Column
-    private int idade;
+    @Column(name = "aprovacao")
+    private Status status;
+    @Column(name = "email")
+    private  String email;
 
 
-    public Aluno() {
-    }
-
-    public Aluno(String primeiroNomeAluno, String sobrenomeAluno, int idade) {
+    public Aluno(String primeiroNomeAluno, String sobrenomeAluno, int idade,String email) {
         setPrimeiroNomeAluno(primeiroNomeAluno);
         setSobrenomeAluno(sobrenomeAluno);
         setIdade(idade);
+        setEmail(email);
+        setStatus(Status.PENDENTE);
 
     }
-    public Aluno(String primeiroNomeAluno, String sobrenomeAluno, int idade, int id) {
-        setPrimeiroNomeAluno(primeiroNomeAluno);
-        setSobrenomeAluno(sobrenomeAluno);
-        setIdade(idade);
 
-        this.id = id;
-    }
 
-    public String getPrimeiroNomeAluno() {
-        return primeiroNomeAluno;
-    }
-
-    public void setPrimeiroNomeAluno(String primeiroNomeAluno) {
-        this.primeiroNomeAluno = primeiroNomeAluno;
-    }
-
-    public String getSobrenomeAluno() {
-        return sobrenomeAluno;
-    }
-
-    public void setSobrenomeAluno(String sobrenomeAluno) {
-        this.sobrenomeAluno = sobrenomeAluno;
-    }
-
-    public int getIdade() {
-        return idade;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    @Override
-    public String toString() {
-        return " Id: "+ id +
-                " Nome='" + primeiroNomeAluno+  " " + sobrenomeAluno + '\'' +
-                ", idade= " + idade  + "\n ";
-
-    }
 }
