@@ -1,8 +1,11 @@
-package br.com.mentoria.ibm.projeto_escola.service;
+package br.com.mentoria.ibm.projeto_escola.service.impl;
 
 import br.com.mentoria.ibm.projeto_escola.model.Escola;
 import br.com.mentoria.ibm.projeto_escola.model.Turma;
 import br.com.mentoria.ibm.projeto_escola.repository.EscolaRepository;
+import br.com.mentoria.ibm.projeto_escola.service.AlunoService;
+import br.com.mentoria.ibm.projeto_escola.service.EscolaService;
+import br.com.mentoria.ibm.projeto_escola.service.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
