@@ -1,5 +1,8 @@
 spring:
   application:
     name: notas-sender
+  kafka:
+    producer:
+      bootstrap-servers : localhost:29092
 server:
   port: ${PORT:8001}
