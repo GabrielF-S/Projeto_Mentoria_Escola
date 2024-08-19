@@ -1,46 +1,30 @@
 package br.com.mentoria.ibm.projeto_escola.controller;
 
 import br.com.mentoria.ibm.projeto_escola.model.Aluno;
-import br.com.mentoria.ibm.projeto_escola.service.AlunoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/alunos")
-public class AlunoController {
-    @Autowired
-    private AlunoService alunoService;
-
+public interface AlunoController {
 
     @PostMapping()
-    public ResponseEntity<Aluno> criarALuno(@RequestBody Aluno aluno){
-        return new ResponseEntity<>(alunoService.criarAluno(aluno), HttpStatus.OK);
-    }
+    public ResponseEntity<Aluno> criarALuno(Aluno aluno);
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Aluno> buscarUmAluno(@PathVariable("id") int id){
-        return  new ResponseEntity<>(alunoService.localizarAlunoPorId(id), HttpStatus.OK);
-    }
+    public ResponseEntity<Aluno> buscarUmAluno(int id);
 
     @GetMapping()
-    public ResponseEntity<List<Aluno>> buscarTodosAlunos(){
-        return new ResponseEntity<>(alunoService.localizarTodosAlunos(), HttpStatus.OK  );
-    }
+    public ResponseEntity<List<Aluno>> buscarTodosAlunos();
 
     @PutMapping()
-    public ResponseEntity<Aluno> atualizarAluno(@RequestBody Aluno aluno){
-        return new ResponseEntity<>(alunoService.atualizarAluno(aluno), HttpStatus.OK);
-    }
+    public ResponseEntity<Aluno> atualizarAluno(Aluno aluno);
+
+    @PutMapping(value = "/aprovacao")
+    public ResponseEntity<?> graduacao(Aluno aluno);
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deletarAluno(@PathVariable("id") int id){
-        alunoService.deletarAluno(id);
-        return new ResponseEntity<>( HttpStatus.OK);
-    }
-
+    public ResponseEntity<?> deletarAluno(int id);
 
 }
